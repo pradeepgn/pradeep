@@ -1,0 +1,181 @@
+$ cat decophase1.pl
+#!/ms/dist/perl5/bin/perl5.14
+
+use MSDW::Version
+  'MIME-Lite'          => '3.030',
+  'Email-Date-Format'  => '1.002', # Used by MIME::Lite
+  ;
+use MIME::Lite;
+
+#use strict;
+#use warnings;
+use Data::Dumper;
+use MIME::Lite;
+use Getopt::Long;# core
+
+use constant TRUE               => 1;
+use constant FALSE              => 0;
+
+
+&processArgs();
+
+################################################################################################################
+#
+# Process arguments passed to the script from the command line.
+# This sub must handle all command line options.
+#
+# Input  : $hostName, $ticketnumber
+#
+# Output : $hostName, $ticketnumber
+#
+################################################################################################################
+
+sub processArgs
+{
+        my %opts;
+        my ($hostname, $ticketnumber) = undef;
+        my $invalidArg     = FALSE;#needs to be defined
+        GetOptions (\%opts,
+                                'host=s'        => \$hostname,
+                                'ticket=s'      => \$ticketnumber,
+                                'help|?',
+                           ) or $invalidArg = TRUE;
+        if($invalidArg)
+        {
+                print "Invalid arguments\n";
+        }
+        else
+        {
+           print "Hostname : $hostname\n";
+           print "Ticket number : $ticketnumber\n";
+           my $serverinfo = &getServInfo( $hostname, $ticketnumber );
+           &pre_requisites( $serverinfo );
+        }
+}
+
+sub getServInfo {
+        my ($hostname, $ticketnumber) = @_;
+        my $serverinfo = undef;
+        $serverinfo = `servinfo $hostname`;
+        return $serverinfo;
+}
+
+sub pre_requisites {
+
+        my $serverinfo = shift;
+
+        if ( $serverinfo eq '' ) {
+                print "Invalid hostname, Enter the correct hostname";
+                exit;
+        } elsif($serverinfo =~ /Status:\s+\.+\s+(\w.*)/){
+                $statusvalue = $1;
+        }
+
+        #$statusvalue = "Build"; #hard code#tbr
+        unless ($statusvalue =~ m/Build/)
+        {
+                print "Approvals and notifications as documented in the procedure are required \n";
+        }
+        #checking if the host is prod host
+        if ($statusvalue =~ m/Production/){
+                print "This is a Production host\n";
+                #check if it's a DB host
+
+                if ($serverinfo =~ m/dbau/g){
+
+                print "This is a DB HOST\n";
+                my $locationinfo = `servinfo -s $hostname -g loc:region -raw`;
+                #print "$locationinfo";#tbr
+
+                        if($locationinfo =~ m/North America/) {
+                                print "Host belongs to \"North America\" region\nPlease follow below escalation procedure\n";
+                                print "Primary: Kendra.Floyd (kendra) ED +1 212 276-0320 NY-1NYP/09
+                                Secondary: Joseph.Rooney (joro) ED +1 212 276-0246 NY-1NYP/09\n";
+                        } elsif($locationinfo =~ m/Asia Pacific/ || $locationinfo =~ m/Japan/ || $locationinfo =~ m/Non-Japan Asia/){
+                                print "Host belongs to \"Asia Pacific\" region\nPlease follow below escalation procedure\n";
+                                print "Primary: Ming.Li (mingli) ED +44 20 7677-3614 LN-CS/06
+                                Secondary: Motohiro.Shimizu (mshimizu) VP +81 3 5424-4452 TK-EBISU/08
+                                Secondary: Catherine.Ip (cathip) VP +852 3963-2624 HK ICC/30 ISG/IT\n";
+                        } elsif ($locationinfo =~ m/Europe/){
+                                print "Host belongs to \"Europe\" region\nPlease follow below escalation procedure\n";
+                                print "Primary: Ming.Li (mingli) ED +44 20 7677-3614 LN-CS/06
+                                Escalation: Steve.Russell (stevenru) MD +1 212 276-0484 NY-1NYP/09
+                                (this is if you can not reach any of the specified points of contact for approval)\n";
+                        } else {
+                                print "Host Location not found, please find manually\n";
+                        }
+
+                        print "Would you like to Escalate \'Yes\' or \'No\' : ";
+                        my $escalate = <>; chomp($escalate);
+
+                        my $return_val;
+
+                        if( $escalate =~ m/^(yes)$/ig){
+                                my ( $from, $to, $cc);
+
+
+                                #print "Yes part\n";#tbr
+                                #Email part;tbr
+                                do{
+                                        print "Please enter the \"From\" Short ID:";
+                                        $from = <>; chomp ($from);
+                                        $return_val = &validate_short_ID( $from );
+                                        print "Wrong ShortID, Please enter the correct ShortID\n" unless($return_val);
+                                } while( !$return_val);
+
+                                        #print "=========$from====\n";tbr
+                                do{
+                                        print "Please enter the \"To\" Short ID:";
+                                        $to = <>; chomp ($to);
+                                        $return_val = &validate_short_ID( $to );
+                                        print "Wrong ShortID, Please enter the correct ShortID\n" unless($return_val);
+                                } while( !$return_val);
+
+                                #print "=====tooooo====$to====\n";tbr
+                                do {
+                                        print "Please enter the \"CC\" Short ID :";
+                                        $cc = <>; chomp ($cc);
+                                        $return_val = &validate_short_ID ($cc);
+                                        print "Wrong ShortID, Please enter the correct ShortID\n" unless($return_val);
+                                        $cc = $cc.',krishvin';#'dbau','dsops',
+                                } while (!$return_val);
+
+
+                                $msg = MIME::Lite->new(
+                                        From     => $from,
+                                        To       => $to,
+                                        Cc       => $cc,
+                                        Subject  => "Deco Phase1/Repurpose Server Phase1 | ".$ticketnumber." | ".$hostname,
+                                        Data     => "Hello,\n\nThe following request $ticketnumber is requesting Phase1 decommision or repurpose of server.\nPrior to doing this work, please review the request and notify the RMC if we can proceed with this request.\n\nThank you,\nUnix-ops L2 \n"
+                                );
+                                print Dumper($msg);
+                                $msg->send; # send via default
+                        } else {
+                                print "Send Escalation email manually";
+                                exit;
+                        }
+                exit;
+                }
+        } else {
+                        print "Host status is Build, proceed with Deco Phase1\n";
+                        print "Note: During the Repurpose Phase 2, DRAC, console info, box DSDB entry etc should not be removed.";
+                        #print $serverinfo
+                        #my $hardwareinfo = `servinfo -s $hostname -g hw`;
+                        #print "================================";
+                        #print $hardwareinfo;
+                        #####call servinfo here
+
+                }
+        }
+
+
+sub validate_short_ID {
+        my $short_id = shift;
+        #print "inside function====$short_id\n";
+        my $short_id_validation = `phone $short_id`;
+        #my $group_id_validation = `dsdb `;
+        #print "===short_id_validation:$short_id_validation===\n";tbr
+        return 1 if( $short_id_validation =~ m/ISG/);
+}
+
+
