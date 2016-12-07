@@ -1,0 +1,74 @@
+WEBOPS formal Over viwe of 
+
+Zapp/Zapplet/Zapp PLant ::
+
+Zapp is the application management system that enables users to remotely control and monitor applications. Zapp performs real-time monitoring of the plant and the applications. 
+
+Leela (Frontend Desktop C# Application)provides a real-time view of many zapp plants at the same time, and allows the user to control, inspect and failover applications and hosts 
+
+Zapplet: Client running on application server that controls applications 
+A zapp plant is a collection of Applications, Schedules, Hosts, and proids that make up a given environment 
+
+Load Balancer :: 
+
+Load balancer (GTM and LTM)- F5 or A10 - Device which distributes the traffic across the number of servers/backends. 
+
+Proxy Server ::
+
+(Intranet and internet) -  Intermediate server or application on client side will be making requests to destination, by hiding actual client.
+
+		Why we are using proxies?
+ 
+			Protect users and networks from web threats, phishing and other attacks
+			Accelerate application performance for files, email, Web, SSL, and rich media applications through 				caching Significantly reduce bandwidth with leading compression, byte caching and object caching 			technologies
+
+Bigdog ::
+
+	is for authenticating the external application users which uses Siteminder in backend this is a inhouse developed product
+
+Apache ::
+
+	mod_jk - An apache module that helps in integrating apache and tomcat through AJP protocol.
+
+Tansen ::
+
+	Service developed inhouse to monitor the application instances health
+
+Flume :: 
+
+	service developed inhouse to copy the logs over NFS share which app owners can view/check using CLI commands.
+
+Stunnel ::
+
+	To uses the OpenSSL libraries to provide a means of connecting to any TCP based service via a SSL encrypted connection.  
+
+LightStreamer ::
+
+	It's an vendor product (http://www.lightstreamer.com/) used for streaming data down to a client, using an adaptive connection. 
+
+		How it works ?
+
+			For Eg : if you see any share prices in matrix site, it will be keep changing, so in background 	they use lightstreamer for streaming the datas in our application.
+
+Zookeeper ::
+
+	is used for seeing current price of shares but we support infrastructure and its designed on farm plant and managed by zapp
+
+
+Webfarm :: 
+
+	web applications deployed/managed by web operations.
+
+Webfarm+ ::
+
+	upgraded version of webfarm, which comes with lot of self-service tools.
+
+Ad2 (app deploy) or Nyx  ::
+
+	Configuration management database, where we store the information about all the applications deployed in webfarm, their apache/tomcat versions, static/dynamic apps, their dependencies like java, cgi, etc.
+
+
+
+	
+	
+
