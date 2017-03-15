@@ -1,0 +1,432 @@
+KNOWLEDGE WEB 
+=====================
+The Knowledge Web is a portal which was created to consolidate the various locations of documentation for Morgan Stanley operation groups. 
+From this Portal, each group has an associated sub-web that contains documentation for that specific group. 
+KW Home page can be accessed via: http://wiki-na.ms.com/KnowledgeWeb2009/
+Every Environment consists of PROD, DRAFT, CERT and LEGACY page, also Runbook Audit requirements, Document Management, Feedback Management.  
+It can be even used to Edit, Attach, Raw view, Mirror to all, Printable, PDF, Changes, History: (revisions),  Backlinks, More actions(To view previous topic, compare, restore, edit, add/replace, delete, rename, copy or to set a new) which are there at the bottom of the Home page.
+==============================================================================================
+Gain KW Access
+===============
+To gain access via Knowledge Web:
+----------------------------------------------------
+•	Go to http://wiki-na.ms.com/KnowledgeWeb2009/ 
+•	Select desired sub-web from the drop-down list, under Operational Groups Select a KW site that you want access to: (It allows selecting the group to access and also provides a brief description of the group)
+•	Click the relevant access group from the LDAP Access Group list
+•	Get into the relevant group in the Firmwide Directory
+•	Click join and provide Business Justification in the pop-up box (Displays a pop up menu stating that relevant environment is a restricted group and to provide the business reason)
+•	Click OK, a request is sent to the approvers of the specific access group. 
+NOTE: Business justification is an absolute requirement, where it will not be granted access without explaining why we need particular access to given groups 
+Any requests e-mailed directly to the access groups will be ignored. It should join the group via the Firmwide Directory. 
+Once if it is approved an e-mail will be received informing that the particular access has been granted or denied.
+===============================================================================================
+Templates
+=========
+All Forms, Boiler plates and Templates stores and displays on KW Splash Page under any Project or its sub web –    All pages
+5 regular Templates used in creating new procedures
+
+Basic		Incident		Standard		Include		Policy
+Creating a new Form
+----------------------------
+In KW home page - http://wiki-na.ms.com/KnowledgeWeb2009, select respective L2 project – All pages – WebTopicCreator (Create a Wiki Topic name) – Create
+Edit the fields required such as Service Catalogue Category or Sub Category and ‘Save’
+Created Form will be visible in the KW Splash Page
+
+Creating a new Boiler Plate
+-------------------------------------
+In KW Splash Page - http://wiki-na.ms.com/KnowledgeWeb2009, select respective L2 project – All pages – WebTopicCreator (Create a Wiki Topic name) – Create
+Edit the fields required such as Title, Service catalogue, Description, etc. and Save
+Created Boiler Plate will be visible in the KW Splash Page
+
+Creating a new Template
+---------------------------------
+In KW Splash Page - http://wiki-na.ms.com/KnowledgeWeb2009, select respective L2 project – All pages – WebTopicCreator (Create a Wiki Topic name) – Create
+Edit the fields required such as Title, Description, etc. and Save
+Draft Banner, L2 and L3 sign off is mandatory
+Created Template will be visible in the KW Splash Page
+To link created Boiler Plate to the present Template, link the particular Boiler plate into the Template as ‘%Include{“TestBoilerPlate”}%’
+To link created Form and its field to the present Template, link the particular Form into the Template through more options ‘Add/Replace form – Select the Form created - Save’
+To reflect the Template Form in KW Splash Page, edit a new form tag in Template created with the Form created
+=========================================================================================================
+CREATE NEW PROCEDURE IN KW
+============================
+
+Documentation team will use the DRAFT sub-web to create a new procedure or to modify an existing procedure. To do so, 
+•	Go to http://wiki-na.ms.com/KnowledgeWeb2009/<Environment>/DRAFT/WebHome
+•	At the bottom right hand corner one can find different templates readily available for use.
+•	Depending on the content of the procedure, choose the correct template
+•	Type the procedure Wiki name. 
+	NOTE: The procedure name should always be a Wiki name. For more information, refer the Twiki Codes page
+•	Click Create
+•	Use the Twiki codes and variables to appropriately create the procedure.
+•	Basic Guidelines are available on the same page
+Some of the templates used are: Basic, Incident, Include, Policy and Standard  
+=========================================================================================================
+KW PAGE
+===========
+Every Environment consists of PROD, DRAFT, Certification, Legacy pages.  
+
+PROD PAGE: 	This is the landing page for any sub-web on KW. The PROD page hosts all the procedures that are made production available. 
+DRAFT PAGE:	The DRAFT Page hosts all the procedures already available on PROD page along with those procedures which are not made production available. This page is mainly used to Create/ Modify any procedure. 
+CERT PAGE:	Sub-web lists out all the procedures which are in Certification staging with the date it was pushed to Certification Staging area. 
+LEGACY PAGE:	Legacy sub-web lists out all the procedures which are decommissioned / legacized. When L2/ L3 decide a procedure is no longer required, it is decommissioned. 
+=========================================================================================================
+SERVICENOW
+Creating new SN Ticket
+=====================
+
+Go to: http://servicenow
+In the left navigation, under Self-service-> Click SUBMIT a new ticket -> then click Products and services requests
+In the right Service Catalog pane, under EI -> Click Knowledge Web
+Choose the appropriate form for the task that needs to be performed:
+CHANGE or NEW Doc requests to existing processes: KW Document Change Request 
+NEW Work Pipeline requests: New Work Pipeline Request 
+
+FD
+=========================================================================================================
+=========================================================================================================
+FIRMWIDE DIRECTORY:
+=====================
+
+A Quick search and an Advance search support several advanced operators, which are query words that restrict the search to a smaller set of documents. 
+Group Manager gives information to Create, Edit and Get memberships for person.
+If it is a new member asks to Join or Edit, if it is an existing member asks to leave.
+
+LDAP Access Group				Description												Type of Access
+---------------------------				---------------------------												---------------------------
+knowledgeweb-<Environment>-prod-rw		Restricted Read/Write access to the particular Environment Production wiki						RW
+knowledgeweb-<Environment>-prod-ro		Read Only access to the particular Environment  Production wiki (This group consists of MS ENG L3 and L2)			RO
+knowledgeweb-<Environment>-draft-rw		Read/Write access to the particular Environment Draft wiki (This group consists of Managed Resource L3 and MS ENG L3)		RW
+knowledgeweb-<Environment>-draft-ro		Read Only access to the particular Environment Draft wiki (This group consists of L2)					RO
+knowledgeweb-<Environment>-legacy		Read Only access to the particular Environment Legacy wiki (This group consists of MS and L2)				RO
+
+To gain access directly via Firmwide directory:
+-------------------------------------------------------------
+•	Go to the Firmwide directory by typing n/ in the browser
+•	Look up for the appropriate group in Group Search
+•	Hit the Enter key or click on the Search button
+•	To view all the Group records click on the View All Results link
+•	Select the required category
+•	Click join and provide a business reason for why you need access
+•	Click OK
+NOTE: Business justification is an absolute requirement, where it will not be granted access without explaining why we need particular access to given groups 
+Any requests e-mailed directly to the access groups will be ignored. It should join the group via the Firmwide Directory. 
+Once if it is approved an e-mail will be received informing that the particular access has been granted or denied.
+=========================================================================================================
+SC & Sharepoint
+Service Catalogue 
+================
+Service Catalogue (SC) is designed to provide a central authoritative source for all service tasks along with the related data required to utilize and report on those tasks.
+=========================================================================================================
+Tech Writers Transition SharePoint Site 
+================
+The Knowledge Web Migration SharePoint site (KWM) is a repository for housing documentation prep work and for tracking the progress and status for procedures migrated to KW.  It allows for collaboration between L2/L3 Engineers and Tech Writers from initial receipt of a document, through migration to KW templates; as well as any revision activity necessary to ready and determine signoff before moving into the KW production environment for daily, reliable consumption.  Progress on the documentation lifecycle is noted through dashboard tracking so that no document slips off the migration radar.
+The KWM SharePoint site is organized into tracks (operational groups) that have their own sub-sites within KWM. 
+ NOTE: Some environments, such as UNIX, Storage, and MQ do not have a site on KWM SharePoint as they had completed their migrations prior to KWM’s existence.  Windows have completed their migrations; however, may use KWM for tracking KW procedure revisions. IPSG does not use KWM to initiate a procedure migration; they solely use JIRA for their KW migrations and revisions.  
+
+JIRA USER GUIDE
+
+
+Table of Contents:
+
+
+JIRA Projects	2
+JIRA’s Signoff	2
+Document Management Process	2
+What is JIRA meant to accomplish?	3
+How to create a new JIRA?	3
+How to recognize the signoff within the JIRA?	5
+How to Comment, Close or Assign a JIRA Issue?	6
+Who makes up the documentation signoff team?	7
+How to complete the Signoff or Change History Table?	8
+When a JIRA will be considered as closed?	9
+How to search for an existing JIRA?	9
+JIRA Checklist	10
+When creating a JIRA task	10
+When responding to a JIRA task	11
+L1/L2/L3  Team(s)	12
+Tech Writers	12
+Tech Writers Responsibilities	13
+
+
+ 
+JIRA Projects
+
+JIRA is the issue tracking and project management system that tech writers and operational teams use to initiate, track, and collaborate on various tech writing projects, as well as procedure migrations.  
+
+Issues are tracked in JIRA via Projects.  For example, the PM – KWTW project is used for tech writing project.
+
+JIRA should be closed only by the TW’s, Last Sign off should be done by L2 to proceed with the scripts for TW’s.
+
+JIRA’s Signoff
+
+Main purpose of JIRA’s Signoff is to provide a mechanism for tracking and sending e-mail notifications relating to all communication between MS L3 Eng, L2 Sr. Mgmt, and tech writers, regarding KW documentation activity.
+
+When L2 initiates a revision to a document and forwards it to L3, so long as the document does not constitute immediate emergency handling or present a major issue that requires additional time for address, L3 is expected to provide review/signoff within 48 hours.
+
+To address any questions regarding JIRA, such as creating issues, responding to JIRA-generated issues, and understanding the overall workflow involved in working through JIRA email notifications.
+
+L2 Sr. Management should be last to signoff any newly migrated or requested revisions to existing procedures in KW prior to pushing the procedure to the Prod environment.
+
+Note: To address any questions regarding JIRA, such as creating issues, responding to JIRA-generated issues, and understanding the overall workflow involved in working through JIRA email notifications you can refer to the JIRA signoff document from: http://wiki-na.ms.com/pub/KnowledgeWeb2009/DocumentationChangeManagement/KW_Doc_Signoff_Process_v.11_modified.docx
+
+Document Management Process
+
+Documentation creation and revisions can now be initiated by either Morgan Stanley L3 Ops or Keane L2 Ops/Sr. Management, and the Draft wiki is a working environment towards this Change Management effort.  To facilitate and track signoff within this process, a JIRA Project has been created named http://jira1.ms.com/jira/secure/Dashboard.jspa . 
+
+The following document explains how to work within the JIRA from creation of an issue (in this case a suggested revision being made to a document or a document newly created) to its close (when L2 wiki tech writers indicate signoff by moving an approved procedure in draft to the production environment).
+
+FINAL SIGNOFF MUST ALWAYS BE DONE BY L2 with a request for Tech Writers to push to production.
+What is JIRA meant to accomplish?
+
+1.	Morgan Stanley Eng L3 signoff and Keane L2 Sr. Management signoff will be conducted by communication through any JIRA based on the environment (ex: http://jira-shared1.ms.com:9000/releng/jira/webapp/browse/WEBOPS) which is essentially email notification referencing hyperlinked documentation issues/revisions that are created within the JIRA and tracked from creation to closure.
+2.	Through the Draft wiki, Morgan Stanley Eng L3 or Keane L2 Team Leads/Sr. Management can initiate a revision to a document and forward it for review and signoff in the JIRA to prepare it for its addition to the production wiki.  So long as the document does not constitute immediate emergency handling or present a major issue that requires additional time for address, Morgan Stanley Eng L3 and Keane L2 Sr. Management are expected to provide review/signoff within 48 hours.  
+3.	Once you receive a JIRA requesting signoff, it is important to respond as quickly as possible in order to have the latest data provided in production.  
+ 
+How to create a new JIRA?
+
+1.	Open the JIRA weblink: http://jira1.ms.com/jira/secure/Dashboard.jspa
+
+  
+
+2.	Choose the project
+
+ 
+3.	Click on “Other -> Issue” 
+
+ 
+
+4.	Next, fill in all the information that is required, such as a Summary of the issue, a Description, Attachments and so on. 
+
+5.	Click on Create, and the JIRA has been created. 
+
+a.	An email will be sent out to the appropriate users to inform them of this JIRA.
+
+b.	From there, someone will be able to “grab it” and work on this JIRA.
+
+ 
+6.	Notice that there is a section called Assignee. If this section is left to Automatic then anyone can “grab it” which recognizes their work environment. 
+
+a.	Certain people can be designated to review or signoff the document if selected on the pick list provided in the JIRA. When the JIRA email has been sent out, you will notice your name will be on the TO: section of the email, but look at the body of the email because it could be assigned specifically to someone within the Windows Hosting group for instance.
+How to recognize the signoff within the JIRA?
+
+1.	A notification of a new JIRA will come through e-mail
+
+ 
+
+NOTE:  The title of email will have the Status of the JIRA (Created, Assigned, Comment, Updated, Resolved, Closed and so on), the Name of the JIRA Project (WEBOPSJIRA -XX <- This number is so each JIRA is unique), and the Title of the JIRA Issue.  Example:  [JIRA] Created: (WEBOPSJIRA -156) BD-Build is read for L3 review along with comments from L2 Procedure. 
+
+2.	Within the email, there will be information indicating that a procedure document concerning your environment flavor (Core Technology, External Websites, Portals, etc) is being revised and requires signoff. The JIRA may be assigned to you specifically or to your environment in general, but will state so in the body of the email.  The person who created the JIRA will have their name in the email as well so you’ll know who the initiator of the JIRA was.
+
+NOTE:   When a Jira is assigned to an individual, nobody else on the team is able to re-assign it to themselves. 
+
+3.	The URL to the JIRA is also included in the email. Click on the URL if you need to make any changes or updates to the JIRA. For example, if signoff was required, and you completed the task, you will need to go to the JIRA, update it, and resolve it. 
+
+NOTE: The JIRA does not close out until L2 wiki tech writers move the item into production and both tables are signed off. If the JIRA is irrelevant to signoff or review, and it is decided the changes should have never been considered in the first place, then you should be able to close that JIRA. Once you have done that, another email will be sent out indicating your changes to the JIRA with your name in the JIRA.
+How to Comment, Close or Assign a JIRA Issue?
+
+1.	Once the JIRA email notification has been received, click on the URL within the email.
+
+2.	This brings you directly to the JIRA. If you notice on the top of the screen there are various actions to choose. 
+
+     
+
+•	Edit the issue
+•	Close the Issue 
+•	Assign  to me - Which you would do if you want to work on this JIRA and if it has not already been assigned
+•	Comment - Additional information or brief comments can be placed here once the JIRA has been assigned to someone.
+•	Assign – If you want to assign the issue to someone.
+
+NOTE: Once you update the JIRA, everyone in the JIRA group of that respective environment will receive the emails of what you have done to the ticket. 
+
+3.	The most efficient way to update and work on a JIRA is:
+a.	Assign the ticket to yourself (to me). This way everyone receives an email and is notified that you are handling this issue. (This is only if the JIRA has not already been assigned to you.)
+
+b.	Do what needs to be done regarding the JIRA. If you need to signoff on a specific document, then do so. (Goto: “Who makes up the documentation signoff team?”)
+
+c.	Include details of your work in the Comment section.  If there are any issues with what you are trying to do in regards to the JIRA, then submit a Comment. This way, everyone can see you worked on this JIRA, but cannot complete it due to unforeseen circumstances.
+
+d.	If you are able to complete the task, Resolve the JIRA 
+
+e.	Finally, if everything has been completed (review/signoff on both sides with no additional issues), indicate so and alert signoff is complete and ready for tech writer who will then move into production and close out JIRA. L2 wiki tech writers move the item into production, Close the JIRA. Again, everyone will receive an email of the status changes on the JIRA.
+
+f.	If this issue needs to be reopened, there is always an option to Reopen a closed JIRA.
+
+
+
+
+
+Who makes up the documentation signoff team?
+
+•	You can always consult the MS and KN signoff teams on the Knowledge Web under http://wiki-na.ms.com/twiki/cgi-bin/view/KnowledgeWeb2009/<Environment>/DocumentationChangeControl. 
+
+•	Morgan Stanley Eng L3 and Keane L2 Sr. Managers will be signing off within the wiki. 
+
+•	If one party makes a revision (whether Keane or Morgan Stanley), one alternate party from Morgan Stanley Eng L3 and one alternate party form Keane L2 Sr. Management must sign off. Once a person signs off, they must indicate so in the JIRA comment field (here, we will cite Sean Cashin as an example):  Signoff: <date>: cashinse
+
+•	There will be one person in Keane L2 Sr. Management and one person in Morgan Stanley Eng L3 (each is actually expected to update their specific signoff table within the procedure in draft), who signs off on the actual procedure in draft to complete the KN signoff table or the MS Change History table. (Goto:  “How to complete the Signoff or Change History Table?”). 
+
+•	The comment in the JIRA and the signoff tables should read as follows: Updates per JIRA <JIRA-number> signed off from Morgan Stanley OPs L3 OR Keane L2 Sr. Manager.
+
+•	When signoff is complete (and FINAL SIGNOFF MUST ALWAYS BE DONE BY L2 with a request for TWs to push to production), a JIRA alert must be sent to the group stating that the document has been executed by both parties and is ready for production and JIRA close.  
+
+•	The L2 wiki tech writers will recognize this JIRA alert and push the document from draft into production, then close the JIRA with a note that the same is complete.  At this point, and separate from the JIRA, KN will notify their team internally that changes have been made and there is either a new or revised document in production. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+How to complete the Signoff or Change History Table?
+
+1.	Whether you are Morgan Stanley Ops L3 OR Keane L2 Sr. Management, you will need to sign off on the document in draft by completing the Signoff tables.  Signoff from Morgan Stanley Ops L3 and L2 Keane Sr. Managers is required.
+
+NOTE:  L2 Keane Sr. Management should be last to signoff any newly migrated or requested revisions to existing procedures in KW prior to pushing the procedure to the Prod environment.
+
+These Signoff tables are located at the bottom of each procedure.  Ex below:
+ 
+	L2 Signoff table:
+
+ 
+
+	L3 Change History table:
+
+ 
+
+Example:
+
+     
+
+2.	Notice that there are two areas for signoff, one for Keane Sr. Management and one for Morgan Stanley Eng L3.  Keane L2 Sr. Managers sign off on the L2 Signoff (Keane Senior Management) section of the procedure in draft, which is different than the Change History table where only Morgan Stanley Eng L3 will sign off.
+
+3.	Enter in your UserID, the Date and any Comments you may have. If no comments necessary, simply add “reviewed in full/signed off”. 
+
+
+When a JIRA will be considered as closed?
+
+The last party to complete signoff should indicate by JIRA mail that signoff is fully complete and that L2 wiki tech writers should move draft to production and close out the JIRA.
+
+How to search for an existing JIRA?
+
+1.	Open the respective JIRA link: (ex: http://jira-shared1.ms.com:9000/releng/jira/webapp/browse/WEBOPSJIRA)
+
+ 
+
+2.	At the bottom right hand side of the screen, The Project Summary will have all Opened, Closed, and Unassigned Issues.
+
+3.	If you know which JIRA you are looking for (ex: WEBOPSJIRA -2) and you know this JIRA is still open, you can click on the Open option, and the next screen will display all the opened Issues in WEBOPSJIRA. Look for the specific number (ex: WEBOPSJIRA-2). 
+
+
+
+
+JIRA Checklist
+
+When creating a JIRA task
+
+1.	 http://jira1.ms.com/jira/secure/Dashboard.jspa and choose the respective environment 
+	YES
+
+2.	Choose the environment from the drop down
+		YES
+
+3.	Select the Issue Type (Bug, Task, Improvement, etc).  Move to next screen.
+☒	NO
+
+4.	Be sure to complete Assignee section by dropping down task list and selecting a party if specific party needs to act on your request.  NOTE: If this section is left automatic, which may be preferred, then you are indicating anyone in the designated environment can work on it as soon as received through JIRA mail in Outlook.  This may be preferred to avoid work stagnating in one person’s email should they be travelling, on vacation, ill, etc.  Leaving the JIRA unassigned allows a quicker response in these circumstances.
+☒	NO
+
+5.	Must complete Summary (here you must assign the JIRA to the appropriate WEBOPS environment – Core Technology; External Websites; Portals; Unix Hosting; Windows Hosting and indicate the subject of your JIRA -  Ex: Name of the Procedure created or revised)
+☒	NO
+
+6.	Provide a Description (here it would be necessary to embed your draft document URL with your request instructions.  It’s advisable to re-read your request instructions to be sure they are clear for action by your peers).
+		YES
+
+7.	If necessary, include any applicable attachments that pertain to the document you are putting through the JIRA review/signoff process.  
+		YES
+
+8.	When data entry is complete, click Create and the JIRA will be issued. 
+		YES
+
+When responding to a JIRA task
+
+1.	When a notification from JIRA comes through your email, you will see the title of the email has the Status of the JIRA (Created, Assigned, Comment, Updated, Resolved, Closed, etc), the Name of the JIRA project (ex: WEBOPSJIRA-XX - Jira number is unique), and the Title of the JIRA issue [JIRA Created: (WEBOPS – 32) LD2Guide Procedure.
+	YES
+2.	Check whether you are specifically assigned to the JIRA in the body of the email (the email will be addressed to you but the body of the email will indicate whether 1. this is your working environment and/or 2. you were asked specifically to act on the email).  If it is your environment and the JIRA is unassigned, you may act on it by clicking on the JIRA URL included in the body of the email.
+	YES
+3.	 Once you click on the JIRA URL in the email, you will be brought directly to the JIRA.  Under Operations, if the task has not been specifically assigned to a party, be sure to Assign the issue to yourself (to me).  
+	YES
+4.	 Do what needs to be done in the JIRA per the request (ex: review and sign off, make further comments) but be sure to include details of your work in the Comment section.  This Comment section allows the next party to understand what you have done in response to the original request (ex: challenged the request with further revisions, reported an issue, or indicated approval through signoff).   
+☒	NO
+5.	 If you make additional revisions to the document, make sure what you’ve revised is reflected in the comment section so that the next party doesn’t get confused what last took place.
+	YES
+6.	 If you are signing off the document without further issue, make sure you sign off the applicable signoff table in the draft document, then report in the Comment section that you have done so.  Without signing off the signoff table with your UserID, date and Comment, the document will end up rerouting to you before it is able to be placed by wiki Techwriters into production.
+	YES
+7.	 If you are the first party to request a change or enter a newly migrated doc to JIRA, indicate which party needs to review/signoff (reminder, this is a two-party signoff between L2 KN Sr. Mgmt and MS L3), make sure you indicate what action is necessary in the Comment section (Ex: This document has been signed off and still requires review/signoff by whatever signoff party is applicable, L2 or L3). (For WebOps, be mindful, L2 must have final signoff and always requests final push to production by TWs.  TWs will prepare the document for production by removing banners, moving into PROD and closing out the JIRA). 
+☒	NO
+8.	 Whenever data entry is complete in the JIRA you are working on, click Create and the JIRA will be issued. 
+	YES
+
+L1/L2/L3  Team(s)
+
+Creates Service Catalogue spreadsheet task list– Repeatable operational tasks identified by individual Task Name
+
+      Categorize SC Task & Quantify Workload 
+
+•	Execution Effort, Executor and Data Tracking
+
+•	Monthly man hours/ticketing; capacity; reprioritization
+
+•	Written Business rules/policy around tasks
+
+•	Implement into ticketing system (Falcon/ServiceNow); create Metrics around SC and ticketing
+
+•	Identify SLA & non-SLA
+
+Tech Writers 
+
+Enters the KW Draft link in KWM informing the team by status queues used on KWM until document is executed by environ TL as ready for production
+
+(1) TW and Jira
+
+TW(s) create a Jira(s) once environment has agreed to use it for review/signoff during procedure migration
+
+During review/signoff process, Jira(s) are also assigned to TW(s) once a procedure is ready to be pushed to Production
+
+(2) Teams and Jira
+
+Teams usage of Jira(s) involves communicating with different members of the team involved with the migration for the purpose of documentation review/signoff.
+
+(3) Tracking and Reporting
+
+Even after migration, Jira(s) lend transparency to documentation review/signoff and revision process, and are useful for tracking and reporting purposes for all parties involved during the migration process and thereafter.
+
+
+
+
+
+Tech Writers Responsibilities
+
+	To resolve issues in respective environments, TW’s support L2, and L3 engineers in standardizing the procedures. 
+
+	Create KWM SharePoint site and sub-webs under KW for specific environment
+
+	Create respective Templates by communicating with the Teams
+
+	Create JIRA project for review/signoff activity
+
+	JIRA provides an opportunity to effectively communicate with L2 and L3 teams for any concerns regarding a procedure or procedural changes. 
+
+	Audit Process:
+
+•	A Perl script runs on the 1st of every month which generates a report with Signoff Status and Expiry report. This script also creates JIRA automatically for those procedures which are expired. The script sends out an automated email with the links to the list of expired procedures. This is circulated to the Team to review the Knowledge web production documents that are expiring that month.
+
+•	It provides Signoff Status Report and Expiry Report
+
