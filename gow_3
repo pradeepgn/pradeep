@@ -1,0 +1,1486 @@
+
+
+Open source wiki-based application platform
+Written in Perl 5, uses a number of shell commands
+Peter Thoeny in 1998
+Users can create wiki pages using the TWiki Markup Language, and developers can extend wiki application functionality with plugins.
+Used to run document management system, or  knowledge base
+It is very user friendly compared to some well established commercial groupware systems like Lotus Notes.
+leading open source enterprise wiki and application platform with an extensible plugin architecture
+unique and extremely powerful.
+
+Edit link: To edit a page, simply click on the Edit link at the bottom of every page. Everybody can change a topic or add content by just using a browser.
+Text formatting: Simple, powerful and easy to learn text formatting rules.
+File attachments: Upload and download any file as an attachment to a page by using your browser. 
+Revision control: All changes to pages and attachments are tracked. Retrieve previous page revisions and differences thereof. Find out who changed what and when.
+Access control: Define groups and impose fine grained read and write access restrictions based on groups and users.
+Managing pages: Individual pages can be renamed, moved and deleted through the browser.
+Conflict resolution: Content is merged automatically if more than one user is edit a page at the same time. In rare cases where a conflict cannot be resolved automatically, users are warned and guided to resolve the conflict manually.
+Referred-By: Find out back-links to a page
+=======================================================
+<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+=======================================================
+
+Create table of contents 
+%TOC%
+============================
+
+First level heading
+---++ 
+============================
+
+Second level heading
+---+++ 
+============================
+
+Third level heading
+---+++
+(maximum heading depth is 6)
+============================
+
+Break Tag
+<br>, <br /> or %BR%
+============================
+
+Bold
+*Word* or <b></b> or <strong></strong>
+============================
+
+Italic
+_text_
+============================
+
+Bold Italic
+<b><i>text italic bold</i></b> OR __text__
+============================
+
+Backgroud Highlighting Code
+<pre><span style="color: #000000; background-color:yellow"> Text is placed here </span> </pre>
+OR
+%REDBG% red background %ENDBG%
+============================
+
+Display Commands/Outputs
+<verbatim> </verbatim>
+<pre> </pre>
+=text=
+==text==
+============================
+
+%TWISTY{
+  showlink="Show Screenshot"
+  hidelink="Hide Screenshot"
+  showimgleft="%ICONURLPATH{toggleopen-small}%"
+  hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}% Twisty Content
+%ENDTWISTY%
+
+==========================
+
+Email addresses link
+[[mailto:user@domain][descriptive text]]
+[[mailto:a@b.com][Mail]]
+============================
+
+Protected Text:
+<sticky> |
+ | ^ | <div> |
+ | ^ | This div is required |
+ | ^ | </div> |
+ | ^ | </sticky> 
+============================
+
+Blank Spaces
+&nbsp;
+============================
+
+Symbols
+&#124; => Vertical Bar (|)
+&amp;  => Ampersand (&)
+&#37;   => Percent Sign (%)
+&lt;       => <
+&gt;      => >
+&#94;   => ^
+============================
+
+Quotes
+&quot;text goes here&quot;
+&lsquo; text goes here &rsquo;
+
+============================
+bullet list
+
+<space><space><space>*
+
+============================
+ nested list
+
+<space><space><space><space><space><space>*
+
+============================
+
+Number List
+1
+1
+1
+
+============================
+
+Alphabetical List
+a. a. a./ A. A. A./i. i. i./I. I. I.
+
+============================
+
+Definition List
+<space><space><space>$ Sushi: Japan 
+
+============================
+
+Table
+| *A1* | *B1* | *C1* | *D1* |
+| A2 |>> B2
+   * Bullet
+   * list
+   * is
+   * possible
+<<|>> C2
+  | *C2.1* | *C2.2* |
+  | Embedded | table |
+  | possible | too |
+end C2
+<<| D2 |
+| A3 | B3 | C3 | D3 | 
+
+============================
+
+Inserting an Image
+%FILEURL%/FILE.jpg(JPG file)
+OR
+%ATTACHURL%/file.ext(Bitmap Image file)
+OR
+<img src="http://wiki.ms.com/twiki/pub/KnowledgeWeb2009/IPSG/DRAFT/<procedurename>/xxxxx.xxx" alt="xxxxx.xxx" width="xxx" height="xxx" /> 
+OR 
+<img src="%PUBURL{"%BASEWEB%"}%/%BASETOPIC%/Filename.JPG"/>
+OR
+<img src="%ATTACHURL%/Filename"/>    -> for INCLUDES
+OR
+%FILEURL%/filename – for the rest
+
+%INCLUDE{"%ATTACHURL%/Sample.txt"}%
+
+[[%ATTACHURLPATH%/Morgan_Stanley_Consultant_Onboarding.pptx][Morgan Stanley Consultant Onboarding.pptx]]
+
+<a href="U:\Desktop\Onboarding_Checklist_UCCOps.xls">
+Onboarding_Checklist_UCCOps.xls 
+</a>
+
+============================
+
+Opening Link
+[[Link/URL][Name of the Link]]
+<a href="http://www.w3schools.com/" target="_blank">Visit !W3Schools!</a>
+============================
+
+Include Sub Topic/Site within another procedure
+%INCLUDE{"filename"}%
+
+============================
+BANNERS WHICH HAVE BEEN DECLARED IN WEBPREFERENCES
+
+Note Banner 	-> %NOTEON% text %NOTEOFF%  
+Caution Banner	-> %CAUTION% text %CAUTIONOFF%  
+Important Banner	-> %IMPON% text %IMPOFF%  
+Warning Banner	-> %WARNINGON% text %WARNINGOFF%
+DRAFT		-> %DRAFT%
+Revision		-> %REV% 
+Decommission	-> %DECO%
+Attach Email Address	[[mailto:<email Address>@ms.com][<email group name>]]
+
+
+=========================================================================================
+To change the background to Black color/DOS format
+%TERMINAL% Data to be in black background %NOTERMINAL%
+
+==========================================================================================
+click the image to switch between smaller and larger versions
+<img src="http://wiki-na.ms.com/pub/KnowledgeWeb2009/WebOps/DRAFT/IncludeSayaClearAlert/FindAlert_small.jpg" 
+border="0" alt="Tsuba " id="SMALLtoggler01" />
+%dcclocation%
+
+twiki copy -dumb -overwrite KnowledgeWeb2009/LinuxUnix/NAStoNAS KnowledgeWeb2009/LinuxUnix/DRAFT/TestUnixProcedure
+
+==========================================================
+<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+============================================================
+
+%EDITTABLE{ header="| *UserID* | *Date* | *Comments* |"  format="|text,20,kavyar|label, 0, 16 Oct 2013|text,70|"}%
+------------------------------------------------------------
+%EDITTABLE{ header="| *UserID* | *Date*| *Comments* |"  format="|text,20,%USERNAME%|label,0,%SERVERTIME{"$day $mon $year"}%|text,70|"}%
+------------------------------------------------------------
+
+====================================================================================
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+====================================================================================
+
+
+
+
+
+Twiki : Table of Contents:
+
+TWiki	4
+What's in a TWiki?	4
+To insert Table of contents	4
+Paragraphs	4
+Heading levels	5
+Bold text:	5
+Italic text:	5
+Bold Italic:	6
+To Fix Font:	6
+Bold Fixed Font:	6
+Separator (Horizontal Rule):	7
+Bulleted List:	7
+Icon List:	8
+Numbered List:	8
+Definition List:	9
+Text in Highlited Box/Color:	9
+OtherVariables	9
+Include Topic	9
+Banners	10
+Tables:	10
+To create tables	11
+1. Use Wiki rule with "|" vertical bars	11
+2. Use HTML tables with <table>, <tr>, <td> tags	11
+3. Use preformatted text with <verbatim> tags	12
+WikiWords	12
+To prevent words highlighted with a red-link	12
+Referencing other pages and URLs	13
+WikiWord Links:	13
+Anchors:	14
+External Links:	14
+Forced Links:	15
+Topic Title Links:	15
+Prevent a Link:	16
+Disable Links:	16
+Mailto Links:	16
+Twitter Links:	17
+Verbatim Text:	17
+To keep the formatting as it is, without wrapping around	18
+Literal Text:	18
+Protected Text:	19
+To INCLUDE another topic in the current web	19
+When Text enclosed in angle brackets like <filename> is not displayed.	19
+Attachments	20
+Using twiki tag	20
+Using <img> tag	21
+To start a word with an exclamation mark	21
+TWISTY	21
+Basic Twisty used	22
+To put icons at the left side	22
+To put icons at the right side	22
+To store the last state in a TWIKIPREF cookie, add the parameter remember="on".	23
+If a Twisty state has been stored in a TWIKIPREF cookie before, it can be cleared by using remember="off":	23
+To let the Twisty start with its content folded open, add parameter start="show".	23
+Hide interface if no JavaScript	24
+Twisty headers	25
+All on, all off	25
+Special syntax: format tokens	25
+Usage of Documentation graphics	26
+Documentation graphics	26
+  Document icons	27
+  Topic,   file,   folder icons	29
+  Person,   group,   access icons	30
+  Social networking,   bookmarks	31
+  Changes,   notification icons	31
+  Status,   flag,   LED,   tag icons	31
+  Navigation icons	33
+  Interface icons	34
+  TWiki icons	34
+  Block graphics	35
+  Filetype icons	35
+The 216 Standard Colors	37
+ 
+
+
+TWiki
+
+
+
+What's in a TWiki?
+
+
+A TWikiSite is divided into webs, each one represents a workspace for collaboration. This site has the following webs: Main, TWiki, Sandbox, and many others.
+
+Each web is made up of hyperlinked topics (wiki pages) that appear in your browser.
+
+TWiki is mainly used in commercial environments, often on corporate intranets 
+Examples: Disney, British Telecom, SAP, Wind River, Motorola, Epic Games
+
+TWiki understands pages in plain text just fine, but you can jazz them up using some simple formatting shortcuts. 
+
+Here are some of the more commonly used ones: 
+
+Create an account...
+
+To edit topics or participate in restricted webs, you need to have a TWiki account.
+Go to the TWikiRegistration page to create your TWiki account. Fill in a couple of lines and you're set!
+
+4. Check out TWiki users & groups...
+
+Go to the UserList topic; it has a list of all users of TWiki. Your name will be in this list after you register.
+Go to the TWikiGroups topic in the Main web; it has a list of groups which can be used to define fine grained TWikiAccessControl in TWiki.
+
+5. Learn the page controls...
+
+The buttons at the top and the color-coded control strip at the bottom of the page have a collection of action links. Different skins show different links, but most will have some or all of:
+
+Edit - add to or edit the topic (discussed later)
+Raw Edit - edit the topic using WikiSyntax (discussed later)
+Raw View - show the source text without editing the topic
+Attach - attach files to a topic (discussed later)
+Backlinks - find out what other topics link to this topic (reverse link)
+Print version - goes to a stripped down version of the page, good for printing
+History - topics are under revision control - History shows you the complete change history of the topic, for example, who changed what and when
+r3 > r2 > r1 - view a previous version of the topic or the difference between two versions
+More topic actions - additional controls, such as rename/move, version control, and setting the topic's parent.
+
+6. Create a topic, modify a topic, and link to a topic...
+
+Go to the Sandbox. This is the sandbox web, where you can create topics and add content to try it all out at will.
+To create your own test topic, click on Create TestTopic###, or invent a WikiWord and click on Create by Name. You are now in edit mode where you can add content to the new topic. Save the topic and voilà, you just created your first TWiki page!
+Click on Edit to modify your own test topic again (or any other topic for that matter).
+Now, let's create a new topic starting from your own test topic:
+In edit mode, enter a new text with a WikiWord, for example:
+This is UserGowthrSandbox topic.
+Save the topic. The name appears highlighted with a red-link. This means that the topic doesn't exist yet.
+Click on the red-link. Now you're in edit mode for the new topic.
+Type some text. You can add headings, bullets, tables and more using the controls of the WYSIWYG editor.
+A signature with your name is already entered by default. Keep it at the bottom.
+Note: The Main. in front of your name is a web prefix. It means that you have a link from the current web to your personal topic located in the Main web.
+Save the topic...
+Link to another topic:
+In edit mode, enter the WikiWord of a topic that already exists in the Sandbox web, for example:
+This links to WebSearch.
+Save the topic. WebSearch is now a link you can click.
+Note: WikiWords are linked automatically; there is no link if you look at the text in edit mode.
+You can also create a nice looking link without a BumpyWord. Enter for example:
+[[WebSearch][This is a link to search]].
+Learn about Raw Edit (for advanced/technical users)
+Topics can be modified in WYSIWYG mode (default) and in Raw Edit mode. Raw mode shows text in TWikiShorthand, a very simple markup language. Follow the TWikiShorthand link to see how, then:
+Go back to your own sandbox topic and Raw Edit it.
+Enter some text in TWikiShorthand: bold text, italic text, bold italic text, a bullet list, tables, paragraphs, etc.
+Hint: If you need help, click on the Edit help link located above the text edit box.
+Save the topic.
+  Tip: When you only want to see the source code of a topic click the Raw View link.
+
+
+7. Use your browser to upload files as page attachments...
+
+You can attach any type of file to a topic - documents, images, programs, whatever - where they can be opened, viewed, or downloaded.
+
+Attaching files is just like including a file with an e-mail.
+Go back to your sandbox topic and click on Attach.
+Click [Browse] to find a file on your machine that you'd like to attach; enter an optional comment; leave everything else unchecked.
+Click [Upload file], then scroll to the end of the page to see the new attachment listing.
+Do this again - this time, upload a .gif, .png, or .jpg image file.
+Check the Link box to create a link to the attached file at the end of the topic. The image will show up at the bottom of the topic.
+Edit the topic to move/resize the image.
+If you have an image of yourself, your cat, your sprawling family estate...why not upload it now to personalize your TWiki profile page UserGowthr?
+
+8. Get alerted whenever topics are changed...
+
+WebNotify is a subscription service that automatically notifies you by e-mail when topics change in a TWiki web. This is a convenience service - for many people, checking e-mail is easier than checking the Web.
+If you're using TWiki to collaborate on a project, it's important to know when anyone on your team posts an update. If you're following a specific discussion, it's convenient to know when there's new input.
+Alerts are e-mailed as links to individual topics that have been changed in a set period: Each day, every hour, whatever is configured for your system.
+It's strongly recommended that you try out the service by subscribing to each TWiki web that's relevant to you. You can subscribe and unsubscribe instantly, on a per web basis using WebNotify.
+If you prefer, you can subscribe to RSS and ATOM feeds. Every web has a WebRss feed and a WebAtom feed, respectively.
+That's it! You're now equipped with all the TWiki essentials. You are ready to roll.
+
+
+To insert Table of contents
+
+%TOC% will insert a table of contents
+
+
+Paragraphs 
+
+Blank lines will create new paragraphs.	
+
+You type
+
+1st paragraph 		
+
+2nd paragraph	
+
+You see
+
+1st paragraph
+2nd paragraph
+
+
+
+
+
+
+Heading levels
+
+---+ indicates a heading. Add more +'s for a deeper heading. 
+
+You type 	
+
+---+ This is a heading 	
+---++ And so is this 	
+
+You see 
+
+This is a heading
+     And so is this 
+
+Three or more dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a top level heading, two pluses a second level heading, etc. The maximum heading depth is 6.
+
+  If you want to exclude a heading from the TOC, put !! after the ---+. 
+
+  Empty headings are allowed and won't appear in the table of contents.	
+
+
+Bold text: 
+
+Words get shown in bold by enclosing them in * asterisks.	
+
+You type
+
+*Bold*                                
+
+You see
+
+Bold
+
+
+Italic text: 
+
+Words get shown in italic by enclosing them in _ underscores.	
+
+You type
+
+_Italic_                                
+
+You see
+
+Italic
+
+
+
+Bold Italic: 
+
+Words get shown in bold italic by enclosing them in __ double-underscores.	
+
+You type
+
+__Bold italic__                
+
+You see
+
+Bold italic
+
+
+To Fix Font: 
+
+Words get shown in fixed font by enclosing them in = equal signs.	
+
+You type
+
+=Fixed font=                     
+
+You see
+
+Fixed font
+
+
+Bold Fixed Font: 
+
+Words get shown in bold fixed font by enclosing them in double equal signs.	
+
+You type
+
+==Bold fixed==                
+
+You see
+
+Bold fixed
+
+  You can follow the closing bold, italic, or other (* _ __ = ==) indicator with normal punctuation, such as commas and full stops. 
+  Make sure there is no space between the text and the indicators. 
+  All words enclosed by the indicators need to be on the same line.	
+
+
+
+
+
+
+You type
+
+_This works_,		
+_this does not _		
+_this fails		
+too_	
+
+You see
+
+This works, 
+_this does not _ 
+_this fails too_
+
+
+Separator (Horizontal Rule): 
+Three or more three dashes at the beginning of a line..	
+
+You type
+
+-------	
+
+You see
+
+________________________________________
+
+
+Bulleted List: 
+
+Multiple of three spaces, an asterisk and another space
+
+  For all the list types, you can break a list item over several lines by indenting lines after the first one by at least 3 spaces.
+
+   You type
+		
+* level 1			
+      * level 2	  			    
+* back on 1				
+* A bullet				
+     broken over
+     three lines
+   * last bullet	
+
+
+
+You see
+
+ level 1			
+   o level 2
+ back on 1
+ A bullet broken over three lines
+ last bullet
+
+
+Icon List: 
+
+Multiple of three spaces, an asterisk, text icon:name and another space. 
+
+  Use the name of any TWikiDocGraphics icon.
+	   
+* icon:tip Icon list
+* icon:led-red Full
+* icon:led-green OK
+* icon:unchecked Item 1
+* icon:checked Item 2
+* icon:empty No bullet	
+
+
+Numbered List: 
+
+Multiple of three spaces, a type character, a dot, and another space
+
+Several types are available besides a number:
+
+Type	Generated Style	  Sample Sequence
+
+1.	Arabic numerals	  1, 2, 3, 4...
+A.	Uppercase letters	  A, B, C, D...
+a.	Lowercase letters	  a, b, c, d...
+I.	Uppercase Roman Numerals	  I, II, III, IV...
+i.	Lowercase Roman Numerals    i, ii, iii, iv...
+
+
+
+
+
+
+
+
+Definition List: 
+
+Three spaces, a dollar sign, the term, a colon, a space, followed by the definition.
+
+Deprecated syntax: Three spaces, the term with no spaces, a colon, a space, followed by the definition
+
+
+Text in Highlited Box/Color:
+
+<blockquote> % BLUE% %ENDCOLOR%</blockquote>
+The Color is not required for this in order for it to work. Just use the <blockquote>text</blockquote> tags.
+Use break tags inside a blockquote instead of blank space, if you want the font to emphasis and change style
+
+OtherVariables
+
+Extra spaces 	&nbsp;
+&	&amp;
+Quotes ( “ b”)	&quot;whatever text goes here&quot;
+Single Quote (‘b’)	&lsquo;whatever text goes here&rsquo;
+<text>	&lt;text&gt;
+
+Include Topic
+
+Include Sub Topic/site within a Topic/topic	
+%INCLUDE{"filename"}%
+
+
+
+
+
+Banners Adding highlight boxes
+
+Note       	%NOTEON% text %NOTEOFF%  
+Caution   	%CAUTIONON% text %CAUTIONOFF%  
+Important	%IMPON% text %IMPOFF%  
+or 
+%IMPORTANTON% Text %IMPORTANTOFF%
+Warning	%WARNINGON% text %WARNINGOFF%
+Rev		%REV% - Used when working in the draft wiki, protect your document from revisions by a second party by adding a warning banner that indicates DOCUMENT IN REVISION OR APPROVAL STATE - DO NOT ALTER. 
+
+Tables:
+Each row of the table is a line containing of one or more cells
+Each cell starts and ends with a vertical bar '|'
+Any spaces at the beginning of a line are ignored.
+
+•	| *bold* | header cell with text in asterisks
+•	|   center-aligned   | cell with at least two, and equal number of spaces on either side
+•	|      right-aligned | cell with more spaces on the left
+•	| 2 colspan || and multi-span columns with multiple |'s right next to each other
+•	|^| cell with caret indicating follow-up row of multi-span rows
+•	You can split rows over multiple lines by putting a backslash '\' at the end of each line
+•	Contents of table cells wrap automatically as determined by the browser
+•	Use %VBAR% or &#124; to add | characters in tables.
+•	Use %CARET% or &#94; to add ^ characters in tables.
+  The TablePlugin provides the |^| multiple-span row functionality and additional rendering features	| *L* | *C* | *R* |
+Column Designing:
+%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacing="5" tableborder="3" headerbg="#D5CCB1" databg="#99CCFF, #CCFFFF" tablebordercolor="#99FFFF" headeralign="center" tablewidth="100%"  tableframe="border" columnwidths="5%,10%,10%,20%,20%"}%
+
+
+You type
+
+
+| *L* | *C* | *R* |
+| A2 |  B2  |  C2 |
+| A3 |  B3  |  C3 |
+| multi span |||
+| A5-7 |  5  |  5 |
+|^| six | six |
+|^| seven | seven |
+| split\
+  | over\
+  | 3 lines |
+| A9 |  B9  |  C9 |	You see
+
+L
+C
+R
+
+A2	B2	C2
+A3	B3	C3
+multi span
+A5-7	5	5
+	six	six
+	seven	seven
+split	over	3 lines
+A9	B9	C9
+
+To create tables
+
+There are three possibilities: 
+
+1.	Use Wiki rule with "|" vertical bars. 
+2.	Use HTML tables with <table>, <tr>, <td> tags. 
+3.	Use preformatted text with <verbatim> tags. 
+
+
+1. Use Wiki rule with "|" vertical bars
+ 
+•	Example text: 
+| cell A1 | cell B1 | cell C1 | 
+| cell A2 | cell B2 | cell C2 |
+ 
+•	Example output: 
+cell A1 	cell B1 	cell C1 
+cell A2 	cell B2 	cell C2 
+
+
+2. Use HTML tables with <table>, <tr>, <td> tags 
+
+This is a manual process using HTML commands. 
+
+You enter: 
+
+<table border="1">
+  <tr>
+    <th> Head A </th> <th> Head B </th>
+  </tr><tr>
+    <td> Cell A2 </td> <td> Cell B2 </td>
+  </tr><tr>
+    <td> Cell A3 </td> <td> Cell B3 </td>
+  </tr>
+</table>
+
+Result: 
+
+Head A 	Head B 
+Cell A2 	Cell B2 
+Cell A3 	Cell B3 
+
+
+3. Use preformatted text with <verbatim> tags 
+
+TWiki interprets text as HTML, so you can use the preformatted HTML option to keep the new line of text as is. Enclose the text in <pre> </pre>, or in TWiki's own <verbatim> </verbatim> tag: 
+
+This text will keep its format as it is:
+<verbatim>
+  Unit     Price   Qty  Cost
+  -------  ------  ---  ------
+  aaa       12.00    3   36.00
+</verbatim>
+
+The pre tag is standard HTML; verbatim is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded. 
+
+<verbatim style="background:black; color:#66FF00; padding:3px;"> Text </verbatim>   To make it look like Command prompt without pasting the picture. 
+NOTE: VARIABLES are still Set within verbatim tags (this is a historical peculiarity) 
+
+NOTE: The verbatim opening and closing tags are converted into pre tags; any HTML attributes (e.g., class, id) in the opening verbatim tag are included in the corresponding pre tag. 
+
+
+WikiWords 
+
+One special hieroglyph that is very important is a BumpyWord 
+
+A word that starts with uppercase, then some lowercase, then more uppercases (a.k.a CamelCase) 
+
+This has a special meaning to TWiki; if it matches the name of another topic, TWiki will automatically create a link to that page for you. 
+
+If there is no such page, then the word is highlighted with a red-link, LikeThis. If you click on the red-link, then TWiki will invite you to create that page. 
+
+This lets you enter the names of topics you think should exist, but don't yet 
+
+To prevent words highlighted with a red-link
+
+Red-link points to a topic that doesn't exist yet - click on it to create the new page. This is a TWiki feature - typing a MeaningfulTitle in a comment is an invitation for someone else to add a new branch to the topic. 
+
+To prevent auto-linking - say you want to enter a word like JavaScript - prefix the WikiStyleWord with an exclamation point: 
+
+
+You type
+
+!WikiStyleWord 
+
+You see
+
+WikiStyleWord
+
+To Create a Bookmark or a Link: 
+[[#BookmarkName][LinkName]]
+First select the area where you want the bookmark to be. (Can be on the page you are working on, or on another page.) Insert a # against the Word or Topic. (#BookmarkName)
+Do not use spaces between the bookmark, use a single word with two capital characters. (#FirstSecond)
+Once you have established where the bookmark will be placed, enter in the following code
+[[#BookmarkName][Link Name]]
+To use it from another procedure on the same web: [[ProcedureName #Bookmark Name][Link Name]]
+Sometimes a ? will be displayed on the page. This happens when there is a word with two or more capitals. To avoid this, which is known as a WikiWord? from displaying, use a ! in front of the word Ex: WikiWord
+
+Linking to a whole document 
+To create the link to another page you use the format below where PAGENAME is the name of the Wiki page or a URL in the format of HTTP://xxxxxxxxx.
+[[PAGENAME][FRIENDLY NAME]] 
+
+Example 1 - Linking to a page on the same wiki site
+Source page   ProceduresContacts
+Friendly Name    Contacts
+[[ProceduresContacts][Contacts]] 
+
+Example 2 - Linking to a page on another Wiki site
+wiki site         WindowsTeamPrivate
+Source page     ProceduresContacts
+Friendly Name       Contacts
+[[WindowsTeamPrivate/ProceduresContacts][Contacts]] -or- [[WindowsTeamPrivate.ProceduresContacts][Contacts]]
+Example 3 - Linking to a page outside of wiki
+Site            http://www.somesite.com/contacts
+Friendly Name          Contacts
+	[[http://www.somesite.com/contacts][Contacts]] 
+
+Linking to a section of a document 
+To link to a specific section within another wiki page the section must start with a title, For Example: text procedure by ---+ which denotes a title. 
+TIP : To get the section title go to the page in question, select the section using the pages Table of Contents. This will give you the full URL to the section. You can then remove the part of the URL you do not need which should leave you with the <pagename>#<sectionname> in general.
+[[PAGENAME][FRIENDLY NAME#SECTION]] 
+
+Example 1 - Linking to a page on the same wiki site
+Source page                 ProceduresContacts
+Section                  Europe
+Friendly Name         Contacts
+[[ProceduresContacts#Europe][Contacts]] 
+
+Example 2 - Linking to a page on another Wiki site
+wiki site                  WindowsTeamPrivate
+Source page             ProceduresContacts
+Section                          Europe
+Friendly Name            Contacts
+[[WindowsTeamPrivate/ProceduresContacts#Europe][Contacts]] -or- [[WindowsTeamPrivate.ProceduresContacts#Europe][Contacts]]
+Including another page
+Using the Include variable is very useful where a document has a section, say a table, that can be used in many other documents which must all contain the same content. For example, a table containing escalating contact phone numbers which needs to be the same on all pages for consistency.
+Including a complete page 
+Including part of a page 
+Source page content 
+%STARTSECTION{"__SECTION NAME__"}% 
+%ENDSECTION{"__SECTION NAME__"}% 
+Example
+Source page               ProceduresContacts
+Course page revision     7
+%STARTSECTION{"contacttable"}% 
+some text that can be reused by other pages 
+%ENDSECTION{"contacttable"}% 
+Destination page content
+%INCLUDE{"__SOURCE PAGE NAME__" section="__SECTION NAME__" rev="__SOURCE PAGE REVISION__"}% 
+Example
+Source page                         ProceduresContacts
+Course page revision                  7
+	%INCLUDE{"ProceduresContacts" section="contacttable" rev="7"}% 
+use of links and revisions no HTTP for internal wiki links give link examples
+Referencing other pages and URLs 
+
+•	BumpyWords automatically link to the target page 
+•	[[BumpyWords][bumpy words]] appears as bumpy words 
+•	An ordinary URL pasted into text will appear as a link - http://www.google.com  
+•	You can also prettify URLs using square brackets: 
+•	[[http://www.google.com/][Google]] appears as Google  
+
+WikiWord Links: 
+
+CapitalizedWordsStuckTogether (or WikiWords) will produce a link automatically if preceded by whitespace or parenthesis.
+ 
+  If you want to link to a topic in a different web write Otherweb.TopicName. 
+  To link to a topic in a subweb write Otherweb.Subweb.TopicName. 
+  The link label excludes the name of the web, e.g. only the topic name is shown. As an exception, the name of the web is shown for the WebHome topic. 
+  Dots '.' are used to separate webs and subwebs from topic names and therefore cannot be used in topic names.
+
+It's generally a good idea to use the TWikiVariables %SYSTEMWEB% and %USERSWEB% instead of TWiki and Main.
+
+You type
+
+WebStatistics
+Sandbox.WebNotify
+Sandbox.WebHome
+Sandbox.Subweb.TopicName	
+
+You see
+
+WebStatistics
+WebNotify
+Sandbox
+TopicName
+
+
+
+
+
+
+
+Anchors: 
+
+You can define a reference inside a TWiki topic (called an anchor name) and link to that. 
+
+To define an anchor, write #AnchorName at the beginning of a line. The anchor name must be a WikiWord of no more than 32 characters. To link to an anchor name use the [[MyTopic#MyAnchor]] syntax. You can omit the topic name if you want to link within the same topic.	
+
+You type
+
+ [[WikiWord#NotThere]]
+[[#MyAnchor][Jump]]
+#MyAnchor
+To here	
+
+You see
+
+WikiWord#NotThere
+Jump
+To here
+
+External Links: 
+
+URLs starting with file, ftp, gopher, http, https, irc, mailto, news, nntp and telnet are linked automatically if preceded by whitespace or parenthesis. External links are indicated with a trailing  icon, and open up in a new browser tab or window; the behavior of both can be set in configure or preferences variables (see TWikiExternalLinks for details). Links can be prevented with an ! exclamation point prefix.	
+
+You type
+
+http://twiki.org
+https://google.com
+!http://escaped-link
+
+You see
+
+http://twiki.org 
+https://google.com 
+http://escaped-link
+
+
+
+
+
+
+
+
+
+
+Forced Links: 
+
+Use double square brackets to create forced links: Write [[link]] or [[link][label]] to force a link. 
+
+Use the former for singleton words and if automatic linking is disabled. Use the latter one to specify a link label other than the link. For the link, you can use internal link references (e.g. WikiWords) and URLs (e.g. http://TWiki.org/). 
+
+  Anchor names can be added to create a link to a specific place in a document. 
+  To "escape" double square brackets that would otherwise make a link, prefix the leading left square bracket with an exclamation point. 
+  The topic title instead of the topic name is shown for [[WikiWord]] links if the SHOWTOPICTITLELINK preferences setting are enabled.	
+
+You type
+
+[[WikiWord]]
+[[WikiWord#TheSyntax]]
+[[WikiSyntax][wiki syntax]]
+[[http://gnu.org/][GNU]]
+[[Singleton]]
+escaped:
+![[WikiSyntax]]	
+
+You see
+
+WikiWord
+WikiWord#TheSyntax
+wiki syntax
+GNU 
+Singleton
+escaped: [[WikiSyntax]] 
+
+
+Topic Title Links: 
+
+Use double square brackets and a plus sign to create links with topic title: 
+
+Write [[+TopicName]] or[[+Web.TopicName]] to show the topic title instead of the topic name. The topic title is defined by the form field named "Title", the topic preferences setting named TITLE, or the topic name if neither exists. 
+
+  An alternative syntax is [[TopicName][$topictitle]] or [[Web.TopicName][$topictitle]].	
+
+You type
+
+[[+BugN1234]]
+[[+Bugs.BugN1234]]
+[[BugN1234][$topictitle]]
+	
+You see
+
+The sky is falling
+The sky is falling
+The sky is falling
+
+
+
+Prevent a Link: 
+
+Prevent a WikiWord from being linked by prepending it with an exclamation point.	
+
+You type
+
+!SunOS                     	
+
+You see
+
+SunOS
+
+
+Disable Links: 
+
+You can disable automatic linking of WikiWords by surrounding text with <noautolink> and</noautolink> tags. 
+
+  It is possible to turn off all auto-linking with a NOAUTOLINK preferences setting.	 
+
+You type
+
+<noautolink>
+ RedHat & SuSE
+ </noautolink>
+
+You see
+
+RedHat & SuSE
+
+
+Mailto Links: 
+
+E-mail addresses are linked automatically. 
+
+To create e-mail links that have more descriptive link text, specify subject lines or message bodies, or omit the e-mail address, you can write[[mailto:user@domain][descriptive text]].	
+
+
+
+
+You type
+
+a@b.com
+
+[[mailto:a@b.com]\
+[Mail]]
+
+[[mailto:?subject=\
+Hi][Hi]]
+
+You see
+
+a@b.com
+Mail
+Hi
+
+Twitter Links: 
+
+@twitter IDs are linked automatically. The link rule is defined by the {Links}{TwitterUrlPattern}configure setting.	
+
+
+You type
+
+@twiki                          
+
+You see
+
+@twiki
+
+Verbatim Text: 
+
+Surround code excerpts and other formatted text with <verbatim> and </verbatim> tags. 
+
+  The verbatim tag disables HTML code. Use <pre> and </pre> tags instead if you want the HTML code within the tags to be interpreted. 
+  Preferences variables (* Set NAME = value) are set within verbatim tags.
+
+You type
+
+<verbatim>
+class CatAnimal {
+  void purr() {
+    <code here>
+  }
+}
+</verbatim>	
+
+You see
+
+class CatAnimal {
+  void purr() {
+    <code here>
+  }
+}
+
+
+To keep the formatting as it is, without wrapping around
+
+TWiki interprets text as HTML, so you can use the preformatted HTML option to keep the new line of text as is. Enclose the text in <pre> </pre>, or in TWiki's own <verbatim> </verbatim> tag: 
+
+This text will keep its format as it is:
+<verbatim>
+  Unit  Price  Qty  Cost
+  -----   ------   ----   -----
+  aaa   12.00    3   36.00
+</verbatim>
+
+The pre tag is standard HTML; verbatim is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded. 
+
+
+Literal Text: 
+
+TWiki generates HTML code from TWiki shorthand. Experts surround anything that must be output literally in the HTML code, without the application of TWiki shorthand rules, with <literal>..</literal>  tags. 
+
+  Any HTML within literal tags must be well formed i.e. all tags must be properly closed before the end of the literal block. 
+
+  TWiki Variables are expanded within literal blocks.	
+
+You type
+
+<literal>
+| Not | A | Table |
+<literal>	
+
+You see
+
+| Not | A | Table |
+
+
+Protected Text: 
+
+Experts protect text from mangling by WYSIWYG editors using <sticky>..</sticky> tags. Sticky tags don't have any effect on normal topic display; they are only relevant when content has to be protected from a WYSIWYG editor (usually because it isn't well-formed HTML, or because it is HTML that WYSIWYG would normally filter out or modify). Protected content appears as plain text in the WYSIWYG editor.	
+
+You type
+
+<sticky>
+<div>
+This div is required
+</div>
+</sticky>	
+
+You see
+
+This div is required
+
+
+To INCLUDE another topic in the current web
+
+%INCLUDE{"SomeTopic"}% : Server side include, includes another topic. The current web is the default web. 
+
+Example: %INCLUDE{"TWiki.SiteMap"}%
+
+
+When Text enclosed in angle brackets like <filename> is not displayed. 
+
+TWiki interprets text as HTML, and the '<' and '>' characters define where HTML commands start and end. Text inside angle brackets is treated as HTML, and ignored if it doesn't actually do anything - either way, the brackets and its contents are not displayed. 
+
+If you want to display angle brackets, enter them as HTML codes instead of typing them in directly: 
+•	&lt; = < 
+•	&gt; = > 
+
+You type
+
+(a &gt; 0) 
+
+You see
+
+(a > 0) 
+
+
+Attachments 
+
+Using twiki tag
+
+Attachments are files which have been uploaded and attached to a TWiki page using the 'Attach' function in the footer. 
+
+Attachment  
+Action 
+Size 
+Date 
+Who 
+Comment 
+
+ myco.gif 
+manage 
+9.6 K 	13 Feb 2004 - 18:41 	MushroomMagicMan 
+Attached image file 
+
+	ATTACHURL -- full URL for attachments in the current topic 
+
+You type
+
+%ATTACHURL%/myco.gif 
+
+You see
+
+ 
+
+	ATTACHURLPATH -- path of the attachment URL of the current topic 
+
+•	Syntax: %ATTACHURLPATH% 
+•	Expands to: /pub/TWiki/VarATTACHURLPATH 
+•	Category: AttachmentsAndFilesVariables 
+•	Related: ATTACHURL, PUBURL, PUBURLPATH, SCRIPTURL, SCRIPTURLPATH, FileAttachments (this topic) 
+
+	PUBURL -- the base URL of attachments 
+
+•	Syntax: %PUBURL% 
+•	Expands to: http://wiki-na.ms.com/pub 
+•	Example: You can refer to a file attached to another topic with %PUBURL%/%WEB%/OtherTopic/image.gif 
+•	Category: AttachmentsAndFilesVariables, SystemInformationVariables 
+•	Related: ATTACHURL, ATTACHURLPATH, PUBURLPATH, SCRIPTURL, SCRIPTURLPATH, FileAttachments (this topic)
+ 
+	PUBURLPATH -- the base URL path of attachments 
+
+•	Syntax: %PUBURLPATH% 
+•	Expands to: /pub 
+•	Category: AttachmentsAndFilesVariables, SystemInformationVariables 
+Related: ATTACHURL, ATTACHURLPATH, PUBURL, SCRIPTURL, SCRIPTURLPATH, FileAttachments (this topic)
+Using <img> tag
+
+You type
+
+<img src="%PUBURLPATH%/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" border="0" alt="logo" /> logo.
+
+ You see
+
+ 
+
+ 
+To start a word with an exclamation mark
+
+A leading exclamation point is used to escape wiki formatting. Sometimes it has an unwanted effect, such as when you want to write "! =" (e.g. "not equal"), you will not see the exclamation mark. 
+
+To escape the exclamation mark escape, try prefixing a <nop>. Alternatively, use the HTML entity &#33;, which renders as an exclamation mark, e.g. write A &#33;= B to get "A != B".
+
+
+You type
+
+A <nop>! = B 
+
+You see
+
+"A ! = B"
+
+
+TWISTY
+
+The TwistyPlugin gives you several options to control the appearance of a twisty:
+
+•	use link text or buttons
+•	position an icon left or right
+•	remember the state at the next visit of the page
+•	start the Twisty open or closed
+•	start the Twisty open or closed for the first visit
+•	use a span or div for the content
+•	set a class for the content span or div
+
+Twisty has a fallback mechanism in case JavaScript is not available: all content is displayed and the control buttons are hidden.
+
+Basic Twisty used
+
+%TWISTY{
+  showlink="Show Screenshot"
+  hidelink="Hide Screenshot"
+  showimgleft="%ICONURLPATH{toggleopen-small}%"
+  hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+Twisty Content
+%ENDTWISTY%
+
+Twisty with icons
+
+We will use mode="div" to put the collapsing content below the button (the default mode is "span").
+
+To put icons at the left side
+
+%TWISTY{
+  mode="div"
+  showlink="Show..."
+  hidelink="Hide"
+  showimgleft="%ICONURLPATH{toggleopen-small}%"
+  hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+my twisty content
+%ENDTWISTY%
+
+It will look like this:
+
+ Show...
+
+To put icons at the right side
+
+%TWISTY{
+  mode="div"
+  showlink="Show&nbsp;"
+  hidelink="Hide&nbsp;"
+  showimgright="%ICONURLPATH{toggleopen-small}%"
+  hideimgright="%ICONURLPATH{toggleclose-small}%"
+}%
+my twisty content
+%ENDTWISTY%
+
+Show  
+
+
+
+To store the last state in a TWIKIPREF cookie, add the parameter remember="on".
+
+To test this, reload the page after toggling.
+%TWISTY{
+  showlink="Show"
+  hidelink="Hide"
+  remember="on"
+}%
+my twisty content
+%ENDTWISTY%
+
+Show...
+
+If a Twisty state has been stored in a TWIKIPREF cookie before, it can be cleared by using remember="off":
+
+%TWISTY{
+  showlink="Show..."
+  hidelink="Hide"
+  remember="off"
+}%
+my twisty content
+%ENDTWISTY%
+
+Show...
+
+NOTE: Twisty ids are generated automatically. If you need control over exactly which Twisty should be remembered, add the parameter id:
+%TWISTY{
+  id="currentCustomerList"
+  showlink="Show..."
+  hidelink="Hide"
+  remember="on"
+}%
+my customer list
+%ENDTWISTY%
+Note that id sets a sitewide cookie. To create a unique id, add topic or web variables:
+id="%WEB%_%TOPIC%_currentCustomerList"
+
+To let the Twisty start with its content folded open, add parameter start="show".
+
+%TWISTY{
+  showlink="Show..."
+  hidelink="Hide"
+  start="show"
+}%
+my twisty content
+%ENDTWISTY%
+Hide my twisty content
+
+Likewise use start="hide" to start with hidden content.
+
+%TWISTY{
+  showlink="Show..."
+  hidelink="Hide"
+  start="hide"
+}%
+my twisty content
+%ENDTWISTY%
+
+Show...
+
+Hide interface if no JavaScript
+
+You can use Twisty to show interface elements that should only be visible with JavaScript enabled. For instance the textbox control buttons in the edit screen need JavaScript to work. If a visitor does not have JavaScript on it would not make sense to show these buttons.
+Put the "JavaScript content" in an almost bare bones Twisty. Write showlink="" hidelink="" to not display any default link texts.
+
+%TWISTY{
+  link=""
+  noscript="hide"
+  start="show"
+}%
+<input type="submit" class="twikiButton" value="You surely have !JavaScript" />
+%ENDTWISTY%
+
+ 
+
+Do not forget to set start="show" to show the Twisty content at all.
+When JavaScript is off, the button should be invisible.
+This code will show the button when JavaScript is off:
+
+%TWISTY{
+  link=""
+  start="show"
+}%
+<input type="submit" class="twikiButton" value="You might have !JavaScript" />
+%ENDTWISTY%
+
+ 
+
+
+
+
+Twisty headers
+
+To be able to use header tags like <h2>, use the properties prefix and suffix. Because we have identical show and hide links we can use the shorthand property link.
+
+%TWISTY{
+  prefix="<h4>!!"
+  mode="div"
+  link="Header"
+  showimgleft="%ICONURLPATH{toggleopen}%"
+  hideimgleft="%ICONURLPATH{toggleclose}%"
+  suffix="</h4>"
+}%
+my twisty content
+%ENDTWISTY%
+
+Add the !! to prevent the twisty header appear in the table of contents when you use %TOC%.
+Will create:
+
+!!  Header
+
+All on, all off
+
+You can toggle all Twisties on or off at once by putting a link or button on the page with class twistyExpandAll or twistyCollapseAll.
+<button class="twistyExpandAll twikiButton">Expand all</button> &nbsp; <button class="twistyCollapseAll twikiButton">Collapse all</button>
+Creates these controls:
+Expand all   Collapse all
+When you want to use links, write:
+#VarTOGGLE
+<a href="#TOGGLE" class="twistyExpandAll">Expand all</a> &nbsp; 
+<a href="#TOGGLE" class="twistyCollapseAll">Collapse all</a>
+
+Expand all   Collapse all
+
+
+Special syntax: format tokens
+
+If you use TWiki variables inside TWISTY parameters chances are it will mess up the variable, or the rendered html. Use format tokens to 'delay' rendering of these variables until the Twisty parameters are parsed.
+
+The format tokens are the same as with FormattedSearch:
+
+
+
+Escape:
+Expands To:
+
+$n or $n()	New line. Use $n() if followed by alphanumeric character, e.g. write Foo$n()Bar instead of Foo$nBar.
+$nop or $nop()	Is a "no operation".
+$quot	Double quote (")
+$percnt	Percent sign (%)
+$dollar	Dollar sign ($)
+
+For example, to show an icon inside the link, do not write:
+link="%Y%"
+but use format tokens:
+link="$percntY$percnt"
+... to get:
+  
+
+Or a more complex example using SpreadSheetPlugin; do not write:
+link="Count: (%CALC{"$GET(infoCount)"}%)"
+but use format tokens:
+link="Count: ($percntCALC{$quot$dollarGET(infoCount)$quot}$percnt)"
+
+The 216 Standard Colors 
+
+This table can be used to choose a color in WebPreferences of each web. 
+
+#000000 	#000033 	#000066 	#000099 	#0000CC 	#0000FF 
+#003300 	#003333 	#003366 	#003399 	#0033CC 	#0033FF 
+#006600 	#006633 	#006666 	#006699 	#0066CC 	#0066FF 
+#009900 	#009933 	#009966 	#009999 	#0099CC 	#0099FF 
+#00CC00 	#00CC33 	#00CC66 	#00CC99 	#00CCCC 	#00CCFF 
+#00FF00 	#00FF33 	#00FF66 	#00FF99 	#00FFCC 	#00FFFF 
+#330000 	#330033 	#330066 	#330099 	#3300CC 	#3300FF 
+#333300 	#333333 	#333366 	#333399 	#3333CC 	#3333FF 
+#336600 	#336633 	#336666 	#336699 	#3366CC 	#3366FF 
+#339900 	#339933 	#339966 	#339999 	#3399CC 	#3399FF 
+#33CC00 	#33CC33 	#33CC66 	#33CC99 	#33CCCC 	#33CCFF 
+#33FF00 	#33FF33 	#33FF66 	#33FF99 	#33FFCC 	#33FFFF 
+#660000 	#660033 	#660066 	#660099 	#6600CC 	#6600FF 
+#663300 	#663333 	#663366 	#663399 	#6633CC 	#6633FF 
+#666600 	#666633 	#666666 	#666699 	#6666CC 	#6666FF 
+#669900 	#669933 	#669966 	#669999 	#6699CC 	#6699FF 
+#66CC00 	#66CC33 	#66CC66 	#66CC99 	#66CCCC 	#66CCFF 
+#66FF00 	#66FF33 	#66FF66 	#66FF99 	#66FFCC 	#66FFFF 
+#990000 	#990033 	#990066 	#990099 	#9900CC 	#9900FF 
+#993300 	#993333 	#993366 	#993399 	#9933CC 	#9933FF 
+#996600 	#996633 	#996666 	#996699 	#9966CC 	#9966FF 
+#999900 	#999933 	#999966 	#999999 	#9999CC 	#9999FF 
+#99CC00 	#99CC33 	#99CC66 	#99CC99 	#99CCCC 	#99CCFF 
+#99FF00 	#99FF33 	#99FF66 	#99FF99 	#99FFCC 	#99FFFF 
+#CC0000 	#CC0033 	#CC0066 	#CC0099 	#CC00CC 	#CC00FF 
+#CC3300 	#CC3333 	#CC3366 	#CC3399 	#CC33CC 	#CC33FF 
+#CC6600 	#CC6633 	#CC6666 	#CC6699 	#CC66CC 	#CC66FF 
+#CC9900 	#CC9933 	#CC9966 	#CC9999 	#CC99CC 	#CC99FF 
+#CCCC00 	#CCCC33 	#CCCC66 	#CCCC99 	#CCCCCC 	#CCCCFF 
+#CCFF00 	#CCFF33 	#CCFF66 	#CCFF99 	#CCFFCC 	#CCFFFF 
+#FF0000 	#FF0033 	#FF0066 	#FF0099 	#FF00CC 	#FF00FF 
+#FF3300 	#FF3333 	#FF3366 	#FF3399 	#FF33CC 	#FF33FF 
+#FF6600 	#FF6633 	#FF6666 	#FF6699 	#FF66CC 	#FF66FF 
+#FF9900 	#FF9933 	#FF9966 	#FF9999 	#FF99CC 	#FF99FF 
+#FFCC00 	#FFCC33 	#FFCC66 	#FFCC99 	#FFCCCC 	#FFCCFF 
+#FFFF00 	#FFFF33 	#FFFF66 	#FFFF99 	#FFFFCC 	#FFFFFF 
+See TWiki:Codev.ColorScheme for links to web sites with web safe palettes, scheme generators, and other color tools and reference..
+
+
+
