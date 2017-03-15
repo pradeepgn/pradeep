@@ -1,0 +1,1056 @@
+Project 1
+
+Script Name: Twiki update, modifies, find and replace (Shell Scripts) 
+Purpose: To update/ copy, or modify, remove, replace twiki pages or contents as per customer requirements.
+Status: Any complex improvements to be implemented
+Script:
+
+module load webinfra/twiki-tools/2.0
+# Replace below pathname with new in same format remove "http://wiki-na.ms.com/" from URL of envrionment
+sitesrc=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+# create new file with samne name below and copy all the procedure name per line
+file="Find_Replace.txt"
+user=`whoami`
+cnt=0
+cnt1=0
+while read proc_name
+do
+# proc_name="GroupChat_UnsuspendServeronF5"
+match=1
+#creating temp files "No Change"
+>twikipage.$user
+>twikipage_new.$user
+>attachments.$user
+#Reading procedure information and storing in file "No change"
+twiki lsattach -farm na  $sitesrc.$proc_name >attachments.$user
+  twiki get -farm na -form $sitesrc.$proc_name 1>twikipage.$user
+  #if procedure does not found
+  if [ $? -ne 0 ]
+  then
+    echo "Error getting the procedure $proc_name"
+  fi
+  if [[ ! -s twikipage.$user ]] || grep "This topic name is not recommended because it will not be linked automatically." twikipage.$user 1>/dev/null
+  then
+    echo "The procedure $proc_name doesn't exist, Try a different procedure"
+  fi
+  cnt=`expr $cnt + 1`;
+  pattern=""
+  # replace below patteen line with pattern to find in procedure
+  if grep '%META:FIELD{name="JIRA" attributes="H" title="JIRA" value=' twikipage.$user > /dev/null
+  then
+    cnt1=`expr $cnt1 + 1`;
+    echo "$cnt1) $proc_name "
+    #Replace below line with format sed 's/old pattern/new pattern/g' from_file > to_file
+    # form multiple replcaement repeat same line with same format except temp output file must be Input file to the next command and twiki put command use same file ,
+    sed 's/%META:FIELD{name="JIRA" attributes="H" title="JIRA" value=/%META:FIELD{name="JIRA" attributes="H" title="JIRA" value=""/g' twikipage.$user >twikipage_new.$user
+    match=11
+    pattern="matched";
+  fi
+# echo "$cnt) $proc_name $pattern "
+  if [ $match -eq 11 ]
+  then
+    twiki put $sitesrc.$proc_name twikipage_new.$user
+    for attachfile in `cat attachments.$user`
+    do
+      twiki get -farm na -attachment $attachfile $sitesrc.$proc_name >$attachfile
+      twiki attach -farm na $sitesrc.$proc_name $attachfile
+      rm $attachfile
+    done
+  rm attachments.$user twikipage.$user twikipage_new.$user
+  fi
+  #to execute single procedure please uncomment below line
+#   exit
+done <"$file"
+
+
+2. Script Name: Windows migration
+Purpose: To fetch backlinks from Windows Team Draft and Private Sub-webs to help in migrating the documents from Windows sub-web to KW. 
+Status: First stage of the script is complete. We have the script which generates the required output. Testing of the script is complete and it has successfully generated the desired output. 
+Any complex changes would require a PERL professional. 
+Script:
+#!/ms/dist/perl5/bin/perl5.10
+use strict;
+use MSDW::Version
+        'Data-Dumper'                   => '2.131',
+        'Env-Modulecmd'                 => '1.2',
+        'Date-Manip'                    => '6.25',
+        'Spreadsheet-WriteExcel'        => '2.37',
+				'Parse-RecDescent'              => '1.965001',
+				'OLE-Storage_Lite'              => '0.19',
+				'IO'                            => '1.25',
+				'IO-stringy'                    => '2.110',
+				'MIME-tools'                    => '5.304',
+				'MailTools'                     => '2.07',
+				'MIME-Lite'                     => '3.027',
+				'Email-Date-Format'             => '1.002',
+				'Exporter'                      => '5.65', 
+;
+use Data::Dumper;
+use Env::Modulecmd ('webinfra/twiki-tools/2.0');
+use Date::Manip;
+use Spreadsheet::WriteExcel;
+use MIME::Lite;
+my $list='gowthami.ramaprasad@morganstanley.com';
+my $farm="na";
+my $user=`whoami`;
+my $file_name = 'Windows.xls';
+# To create a work book
+my $workbook = Spreadsheet::WriteExcel->new($file_name);
+my $worksheet = $workbook->add_worksheet("Windows");
+my $format = $workbook->add_format();
+$format->set_bold();
+$format->set_align('center');
+$worksheet->set_column(0, 0,  35);
+$worksheet->set_column(1, 1,  35);
+$worksheet->set_column(2, 2,  35);
+$worksheet->set_column(3, 3,  35);
+$worksheet->autofilter('A1:C1');
+$worksheet->write('A1',"Team",$format);
+$worksheet->write('B1',"Procedure Name",$format);
+$worksheet->write('C1',"Backlinked Procedure",$format);
+# To open a File and retrieve the data from it
+open (FILE, 'update.txt');
+my $i=1;
+my $j=1;
+while (<FILE>)
+{
+			 chomp;
+			 $worksheet->write($i,0,"Windows Team Draft");			
+  		 $worksheet->write($i,1,"$_");   
+			 my $draft_home="WindowsTeamDraft";
+			 `twiki get -farm $farm $draft_home.$_ > draft.$user`;
+			 my @a_proc=`grep '\\[' draft.$user`;
+			 my $count = @a_proc;
+			 
+			 if(@a_proc) # If backlinks found
+			 {
+			      foreach my $e_proc (@a_proc)	     
+			  		{
+				          my ($proc_name);				  				  	
+								  print "$e_proc";
+									print "$proc_name";
+									if ($e_proc =~/\[\[(.*)?\]\[(.*)?\]\]/)
+OR
+if(($temp =~ m/^(.*)\]\]/) && ($temp !~ /(jira1.ms.com)/) && ($temp !~ /(.msg)/) && ($temp !~ /(\@morganstanley.com)/)  && ($temp !~ /(\@ms.com)/))
+									{
+												$proc_name=$1;
+												$worksheet->set_row($j,20);
+												$worksheet->write($j,2,"http://wiki-na.ms.com/WindowsTeamDraft/$proc_name");
+												$j++;
+												$i++;
+									}														
+						}
+			 }
+			 else # If NO backlinks found
+			 {
+            $worksheet->set_row($j,20);
+						$worksheet->write($j,2,"Backlinks not found for this procedure ");										
+						$j++;
+						$i++;
+			 }
+}
+close (FILE);
+$workbook->close();
+ 
+# To send the result through mail	
+	my $msg="Just to check, \n\n Please review";
+	my $to_list='gowthami.ramaprasad@morganstanley.com';
+  my $userid = getpwuid($<);
+
+	&mailto('gowthami.ramaprasad@morganstanley.com',$to_list,"Reports", $msg, $file_name);
+	`rm -f $file_name`;
+        
+	sub mailto
+  {
+      	my ($userid,$recipient,$subject,$msg,$file_name) = @_;
+        my $top = MIME::Lite->new
+        (
+                  Type     => 'multipart/mixed',
+                  From     => $userid,
+                  To       => $recipient,
+                  Subject  => $subject,
+                  Encoding => '7bit',
+        );
+        $top->attach( type => 'text/plain', Data =>$msg, disposition => 'inline' );
+        $top->attach
+        (
+                  Type        => 'Application/Excel',
+                  Encoding    => 'base64',
+                  Path        => $file_name,
+                  Disposition => 'attachment'
+        );
+        $top->send();
+        return;
+  }
+
+3. Script Name: E-Mail Sending
+Purpose:
+Status:
+Script:
+
+#!/ms/dist/perl5/bin/perl5.9
+use strict;
+use MSDW::Version
+  'Spreadsheet-WriteExcel' => '2.37',
+  'MIME-tools'             => '5.304',
+  'MailTools'              => '2.07',
+  'MIME-Lite'              => '3.027',
+;
+                    use MIME::Lite;
+                    use Spreadsheet::WriteExcel;
+                    my $workbook = Spreadsheet::WriteExcel->new('Perl.xls');
+                    my $worksheet = $workbook->add_worksheet();
+                    $worksheet->write('A1', 'Excel!');
+                    $workbook->close();
+                    my $msg="L2 Leads, \n\n Send it to gowthami.ramaprasad\@morganstanley.com if you have questions";
+                    my $to_list='gowthami.ramaprasad@morganstanley.com';
+                    my $file_name='Perl.xls';
+                    my $userid = getpwuid($<);
+                    &mailto('gowthami.ramaprasad@morganstanley.com',$to_list,"Report", $msg, $file_name);
+		   `rm -f $f_name`;
+                    sub mailto
+                    {
+                        my ($userid,$recipient,$subject,$msg,$file_name) = @_;
+                        my $top = MIME::Lite->new
+                      (
+                            Type     => 'multipart/mixed',
+                            From     => $userid,
+                            To       => $recipient,
+                            Subject  => $subject,
+                            Encoding => '7bit',
+                       );
+                    $top->attach( type => 'text/plain', Data =>$msg, disposition => 'inline' );
+                    $top->attach
+                       (
+                            Type        => 'Application/Excel',
+                            Encoding    => 'base64',
+                            Path        => $file_name,
+                            Disposition => 'attachment'
+                       );
+                    $top->send();
+                    return;
+                    }
+
+Difference between SHELL and PERL
+
+1: Shell vs Perl
+Shell: To execute just ‘’filename.sh’’
+Perl: To execute ‘’perl filename.pl’’
+
+2: Shell vs Perl
+$ - only when implementing not declaring
+$ - both when declaring and implementing 
+
+3: Shell vs Perl
+; - not required at the each and every end of the line
+; - required mandatorily at the each and every end of the line
+
+4: Shell vs Perl
+Echo to Display
+Print to Display
+
+5: Shell vs Perl
+Spaces not required before and after operators
+Spaces required before and after operators
+
+6: Shell vs Perl
+Expr for arithmetic operations
+Normal arithmetic operations
+
+Basic commands for Shell script
+
+To create a Directory
+mkdir filename.extension[mkdir<space>filename.extension]
+To create a file
+	cat > filename.extension [cat<space>”>”<space>filename.extension]
+	Enter the code
+	^D to stop, save and exit (CTRL + D)
+To display the contents of file
+	cat filename.extension
+To edit the text – Text Editor
+	vi filename. extension
+	vim filename. extension
+	Press ‘i’ to insert and type commands
+	To save and exit -> esc + ‘:’ + ‘x’ -> Enter
+To execute the program
+	./filename.sh
+	Filename.sh
+To get help about commands in Linux
+	/?
+	Ex: c:\> date /? OR c:\> dir /?
+To know whom all are working
+	who
+To know who is working currently
+	whoami
+To display the contents one by one in the screen 
+	more filename.extension
+To move/rename the File/Directory
+	mv filename1. extension filename2. extension
+To remove the File/Directory
+	rm filename. extension
+To read mail
+mail
+To print file
+	pr filename.extension
+To change File access permissions
+	chmod {+/-} {r/w/x} filename. extension
+	[Note: + set permission	- remove permission	]
+	[Note: r read	w  write	e  execute ]
+To count lines, words or characters in a file
+	wc filename.extension
+To print first/last lines of file
+	tail {+/-} {line number} filename.extension
+To compare files
+	cmp filename1.extension filename2.extension
+	diff filename1.extension filename2.extension
+
+To search a word in the file and display it
+grep “search word” filename.sh
+To search a word in the file and store it into new file
+grep " search word " filename.sh > newfilename.sh
+cat newfilename.sh
+To search any line that starts with that particular word and store it into new file
+grep "^ search word " filename.sh > newfilename.sh
+cat newfilename.sh
+
+To display floating numbers
+Input: echo 5.12 + 2.5 | bc
+Output: 7.62
+Script used in Twiki
+Module used:
+module load webinfra/twiki-tools/2.0
+TWIKI ‘get’
+	Takes the file from source path and place it in temporary file including forms, boiler plates everything.
+Syntax: twiki get -farm FARM -form $sitesrc. procname > $tempfile
+TWIKI ‘put’
+	Copies the file from temporary file and place it in destination path including forms, boiler plates everything.
+Syntax: twiki put -farm FARM $sitedst.procname $tempfile
+TWIKI ‘attach’
+	Attaches the file from source to destination
+	Syntax: twiki get -farm FARM -attachment $attachfile $src.procname > $tempfile
+twiki attach -farm FARM $dst.procname $tempfile
+TWIKI ‘lsattach’
+	List out all the attachments
+	Syntax: twiki lsattach -farm FARM $path.$proc_name
+TWIKI ‘move’
+To rename/move a file within the same site or to a different site
+	Moves the file to destination path and deletes the source path
+	Syntax: twiki move -farm FARM $sitesrc.$proc_name $sitedst.$proc_name
+TWIKI ‘remove’	
+	To remove/delete a file
+Syntax: twiki remove -farm na $sitesrc.Test1Twiki
+Note:
+•	farm  FARM can be "na", "eu", "as", "qana", "qaeu", "qaas", "prod", or "qa"
+•	sitedst  Destination path
+•	sitesrc  Source path
+•	procname  Procedure name
+•	tempfile  Temporary file
+•	attachfile  Attachment file[.jpg/.png]
+•	path  Any given Path
+
+Shell scripting programs
+Contents:
+PGM1: To print the grade and get the output within the code
+PGM2: To print the grade and get the output while executing
+PGM3: Taking the marks of three subjects and calculating the Total, Percentage and Grade
+PGM4: Factorial number using while assigning the value within the code
+PGM5: Factorial number using while assigning the value outside
+PGM6: Factorial number using for assigning the value within the code
+PGM7: To display Table 20 using while loop
+PGM8: Reverse of a given number
+PGM9: Using sed command
+PGM10: Using Twiki get & put – Copying from one procedure to another in same path
+PGM11: Using Twiki get & put – Copying the procedure from source to destination
+PGM12: Using Twiki move – Moving the procedure from source to destination
+PGM13: Using Twiki remove – Removing the procedure
+PGM14: Using Twiki attach – Attaching the files to the procedure required
+PGM15: Using Twiki lsattach – Display all the files of the procedure mentioned
+PGM16: Using Twiki get and put – Copying one procedure’s revision to another in same path
+PGM1  first.sh: To print the grade and get the output within the code
+===========================================================
+Input:
+=====
+if [ 80 -gt 75 ] && [ 80 -lt 100 ]
+then
+  echo "A grade"
+elif [ 80 -gt 50 ] && [ 80 -lt 74 ]
+then
+  echo "B grade"
+elif [ 80 -gt 35 ] && [ 80 -lt 49 ]
+then
+  echo "C grade"
+else
+  echo "Fail"
+fi
+Output:
+======
+PGM2  second.sh: To print the grade and get the output while executing
+=============================================================
+Input:
+=====
+read a
+if [ $a -gt 75 ] && [ $a -lt 100 ]
+then
+ echo "A grade"
+elif [ $a -gt 50 ] && [ $a -lt 74 ]
+then
+ echo "B grade"
+elif [ $a -gt 35 ] && [ $a -lt 49 ]
+then
+ echo "C grade"
+else
+ echo "Fail"
+fi
+Output:
+======
+PGM3  third.sh: Taking the marks of three subjects and calculating the Total, Percantage and Grade 
+====================================================================================
+Input:
+=====
+echo "Enter the marks for English"
+read English
+echo "Enter the marks for Maths"
+read Maths
+echo "Enter the marks for Science"
+read Science
+if [ $Maths -ge 35 ] && [ $English -ge 35 ] && [ $Science -ge 35 ]
+then
+ Total=`expr $Maths + $Science + $English`
+ echo "Total : $Total"
+ Percent=`expr $Total / 3`
+ echo "Percentage : $Percent"
+ if [ $Percent -ge 75 ] && [ $Percent -le 100 ]
+ then
+  echo "A grade"
+ elif [ $Percent -ge 50 ] && [ $Percent -le 74 ]
+ then
+  echo "B grade"
+ elif [ $Percent -ge 35 ] && [ $Percent -le 49 ]
+ then
+  echo "C grade"
+ else
+  echo "Fail"
+ fi
+else
+ echo "Fail"
+fi
+Output:
+======
+PGM4  while.sh: Factorial number using while assigning the value within the code
+====================================================================
+Input:
+=====
+fact=1
+i=0
+while [ $i -le 4 ]
+do
+i=`expr $i + 1`
+fact=`expr $fact \* $i`
+echo "No is : $fact"
+done
+Output:
+======
+PGM5  while.sh: Factorial number using while assigning the value outside
+==============================================================
+Input:
+=====
+echo "Enter the number"
+read a
+fact=1
+i=0
+while [ $i -le $a ]
+do
+i=`expr $i + 1`
+fact=`expr $fact \* $i`
+echo "No is : $fact"
+done
+Output:
+======
+PGM6  while.sh: Factorial number using for assigning the value within the code
+==================================================================
+Input:
+=====
+fact=1
+for i in 0 1 2 3 4
+do
+i=`expr $i + 1`
+fact=`expr $fact \* $i`
+echo "No is : $fact"
+done
+Output:
+======
+PGM7  Table.sh: To display Table 20 using while loop
+=============================================
+Input:
+=====
+n=20
+i=1
+while [ $i -le 10 ]
+do
+echo "$n * $i = `expr $n \* $i`"
+i=`expr $i + 1`
+done
+Output:
+======
+20 * 1 = 20
+20 * 2 = 40
+--
+--
+20 * 10 = 200
+PGM8  rev.sh: Reverse of a given number
+====================================
+Input:
+=====
+echo "Enter number"
+read num
+sumi=0
+while [ $num -ne 0 ]
+do
+sumi=`expr $sumi \* 10 + $num % 10`
+num=`expr $num \/ 10`
+done
+echo "Reverse of digits is  $sumi"
+Output:
+======
+PGM9  test1.sh: Using sed command
+================================
+Input:
+=====
+Maths=40
+Science=60
+CO=70
+sed '/CO/d' test1.sh
+Output:
+======
+PGM10  test.sh: Using Twiki get & put – Copying one procedure to another in same path
+==========================================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+testfile='abc.txt'
+sitesrc=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+twiki get -farm na -form $sitesrc.TestingScript > $testfile
+twiki put -farm na $sitesrc.Test1Twiki $testfile
+Output:
+======
+PGM11  test.sh: Using Twiki get & put – Copying the procedure from source to destination
+=========================================================================== 
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+testfile='abc.txt'
+sitesrc=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+sitedst=KnowledgeWeb2009/MSSB/WebOps
+twiki get -farm na -form $sitesrc.Test1Twiki > $testfile
+twiki put -farm na $sitedst.Test1Twiki $testfile
+Output:
+======
+PGM12  test.sh: Using Twiki move – Moving the procedure from source to destination
+========================================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+sitesrc=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+sitedst=KnowledgeWeb2009/MSSB/WebOps
+twiki move -farm na $sitesrc.Test1Twiki $sitedst.Test1Twiki
+Output:
+======
+PGM13  test.sh: Using Twiki remove – Removing the procedure
+======================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+sitesrc=KnowledgeWeb2009/MSSB/WebOps
+twiki remove -farm na $sitesrc.Test1Twiki
+Output:
+======
+PGM14  test.sh: Using Twiki attach – Attaching the files to the procedure required
+=====================================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+attachfile="script.JPG"
+tempfile="script.JPG"
+src=KnowledgeWeb2009/MSSB/WebOps
+dst=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+twiki get -farm na -attachment $attachfile $src.TestingScript > $tempfile
+twiki attach -farm na $dst.TestingScript $tempfile
+Output:
+======
+PGM15  test.sh: Using Twiki lsattach – Display all the files of the procedure mentioned
+========================================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+path=KnowledgeWeb2009/MSSB/WebOps
+twiki lsattach -farm na $path.TestingScript
+Output:
+======
+PGM16  test.sh: Using Twiki get and put – Copying one procedure’s revision to another in same path
+====================================================================================
+Input:
+=====
+module load webinfra/twiki-tools/2.0
+testfile='abc.txt'
+sitesrc=KnowledgeWeb2009/MSSB/WebOps/DRAFT
+twiki get -farm na -form -rev 5 $sitesrc.TestingScript > $testfile
+twiki put -farm na $sitesrc.Test1Twiki $testfile
+Output:
+======
+twiki get -farm na -form $sitesrc.TestingScript > $testfile
+twiki put -farm na $sitesrc.Test1Twiki $testfile
+twiki get -farm na -attachment -rev 3  $attachfile $src.TestingScript > $tempfile
+twiki attach -farm na $dst.TestingScript $tempfile
+twiki get -farm na -form -rev 3  $sitesrc.TestingScript > $testfile
+twiki put -farm na -form -rev 3 -attachment $attachfile $sitesrc.TestingScript > $tempfile
+twiki attach -farm na $sitesrc.Test1Twiki $tempfile
+Perl scripting commands
+UNIX Commands in PERL
+To create a Directory
+mkdir filename.extension[mkdir<space>filename.extension]
+To create a file
+	cat > filename.extension [cat<space>”>”<space>filename.extension]
+	Enter the code
+	^D to stop, save and exit (CTRL + D)
+To display the contents of file
+	cat filename.extension
+To edit the text – Text Editor
+	vi filename. extension
+	vim filename. extension (Recommended)
+	Press ‘i’ to insert and type commands
+	To save and exit -> esc + ‘:’ + ‘x’ -> Enter
+To execute the program
+	perl filename. extension
+To get help about commands in Linux
+	/?
+	Ex: c:\> date /? OR c:\> dir /?
+To know whom all are working
+	who
+To know who is working currently
+	whoami
+To display the contents one by one in the screen 
+	more filename.extension
+To move/rename the File/Directory
+	mv filename1. extension filename2. extension
+To remove the File/Directory
+	rm filename. extension
+To read mail
+mail
+To print file
+	pr filename.extension
+To change File access permissions
+	chmod {+/-} {r/w/x} filename. extension
+	[Note: + set permission	- remove permission	]
+	[Note: r read	w  write	e  execute ]
+To count lines, words or characters in a file
+	wc filename.extension
+To print first/last lines of file
+	tail {+/-} {line number} filename.extension
+To compare files
+	cmp filename1.extension filename2.extension
+	diff filename1.extension filename2.extension
+To search a word in the file and display it
+grep “search word” filename. extension
+To search a word in the file and store it into new file
+grep " search word " filename. extension > newfilename. extension
+cat newfilename. extension
+To search any line that starts with that particular word and store it into new file
+grep "^ search word " filename. extension > newfilename. extension
+cat newfilename. extension
+To display floating numbers
+Input: echo 5.12 + 2.5 | bc
+Output: 7.62
+Commands in PERL 
+Perl is a case sensitive programming language.
+Rules to follow while declaring scalar variables:
+variable 	# the $ character is missing
+$ 		# there must be at least one letter in the name
+$47x 		# second character must be a letter
+$_var 		# again, the second character must be a letter
+$variable! 	# you can't have a ! in a variable name
+$new.var 	# you can't have a . in a variable name
+To get the value outside
+<STDIN>
+Ex: $var = <STDIN>;
+Usage of ‘’ and “” single and double quotes
+my $text = ‘cool guy’;
+my $string = ‘some $text’;
+print $string; # prints literally “some $text”;
+ my $text = ‘cool guy’;
+my $string = “some $text”;
+print $string; # prints literally “some cool guy”;
+Comments in perl 
+Lines starting with = are interpreted as the start of a section of embedded documentation (pod), and all subsequent lines until the next =cut are ignored by the compiler. Following is the example:
+#!/usr/bin/perl
+
+# This is a single line comment
+print "Hello, world\n";
+
+=begin comment
+This is all part of multiline comment.
+You can use as many lines as you like
+=cut
+Whitespaces in Perl
+A Perl program does not care about whitespaces. Following program works perfectly fine:
+#!/usr/bin/perl
+print       "Hello, world\n";
+Datatypes in PERL
+Perl has three basic data types: scalars, arrays of scalars, and hashes of scalars, also known as associative arrays.
+S.N.	Types and Description
+1	Scalar:
+Scalars are simple variables. They are preceded by a dollar sign ($). A scalar is either a number, a string, or a reference. A reference is actually an address of a variable which we will see in upcoming chapters.
+2	Arrays:
+Arrays are ordered lists of scalars that you access with a numeric index which starts with 0. They are preceded by an "at" sign (@).
+3	Hashes:
+Hashes are unordered sets of key/value pairs that you access using the keys as subscripts. They are preceded by a percent sign (%).
+
+String Literals
+Escape sequence	Meaning
+\\	Backslash
+\'	Single quote
+\"	Double quote
+\a	Alert or bell
+\b	Backspace
+\f	Form feed
+\n	Newline
+\r	Carriage return
+\t	Horizontal tab
+\v	Vertical tab
+\0nn	Creates Octal formatted numbers
+\xnn	Creates Hexideciamal formatted numbers
+\cX	Control characters, x may be any character
+\u	Force next character to uppercase
+\l	Force next character to lowercase
+\U	Force all following characters to uppercase
+\L	Force all following characters to lowercase
+\Q	Backslash all following non-alphanumeric characters
+\E	End \U, \L, or \Q
+
+Perl scripting programs
+Contents:
+PGM1: To display addition of two numbers
+PGM2: Taking the marks of three subjects and calculating the Total, Percentage and Grade 
+PGM3: Factorial number using while assigning the value outside
+PGM4: Factorial number using for assigning the value within the code
+PGM5: To print the number n number of times using for assigning the value outside the code
+PGM6: To print the number n number of times using while assigning the value outside the code
+PGM7: Using while statement to print out the first 10 numbers in descending order (10-1)
+PGM8: Using for statement to print out the first 10 numbers in descending order (10-1)
+PGM9: To create excel sheet and insert the data in it
+PGM10: To create excel sheet, insert the data in it and send the same through mail.
+
+PGM1: To print the grade and get the output within the code
+==================================================
+Input:
+=====
+#!/usr/local/bin/perl
+$inputline = `expr 2 + 3`;
+print $inputline;
+Output:
+======
+perl filename.pl
+5
+PGM2: Taking the marks of three subjects and calculating the Total, Percentage and Grade 
+=========================================================================
+Input:
+=====
+#!/usr/local/bin/perl
+print ("Enter the marks for English \n");
+$English = <STDIN>;
+print ("Enter the marks for Maths \n");
+$Maths = <STDIN>;
+print ("Enter the marks for Science \n");
+$Science = <STDIN>;
+if ($Maths >= 35 && $English >= 35 && $Science >= 35)
+{
+   $Total = $Maths + $Science + $English;
+   print ("Total : $Total \n");
+
+   $Percent = $Total / 3;
+   print ("Percentage : $Percent\n");
+
+     if ($Percent >= 75 && $Percent <= 100)
+     {
+       print ("A grade \n");
+     }
+     elsif ($Percent >= 50 && $Percent <= 74)
+     {
+       print ("B grade \n");
+     }
+     elsif ($Percent >= 35 && $Percent <= 49)
+     {
+       print ("C grade \n");
+     }
+     else
+     {
+       print ("Fail \n");
+     }
+}
+else
+{
+  print ("Fail \n");
+}
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 166$ perl pgm1.pl
+Enter the marks for English
+35
+Enter the marks for Maths
+33
+Enter the marks for Science
+78
+Fail
+shalilx /v/global/user/g/go/gowthr 167$ vim pgm1.pl
+shalilx /v/global/user/g/go/gowthr 168$ perl pgm1.pl
+Enter the marks for English
+67
+Enter the marks for Maths
+66
+Enter the marks for Science
+68
+Total : 201
+Percentage : 67
+B grade
+shalilx /v/global/user/g/go/gowthr 169$ perl pgm1.pl
+Enter the marks for English
+45
+Enter the marks for Maths
+54
+Enter the marks for Science
+44
+Total : 143
+Percentage : 47.6666666666667
+C grade
+shalilx /v/global/user/g/go/gowthr 170$ perl pgm1.pl
+Enter the marks for English
+89
+Enter the marks for Maths
+79
+Enter the marks for Science
+98
+Total : 266
+Percentage : 88.6666666666667
+A grade
+
+PGM3: Factorial number using while assigning the value outside
+====================================================
+Input:
+=====
+#!/usr/local/bin/perl
+print "Enter the number \n";
+$a = <STDIN>;
+$i = 0;
+$fact = 1;
+while ($i <= $a)
+{
+   $i = $i + 1;
+   $fact = $fact * $i;
+   print ("$fact \n");
+}
+
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 191$ perl pgm1.pl
+Enter the number3
+1
+2
+6
+24
+PGM4: Factorial number using for assigning the value within the code
+========================================================
+Input:
+=====
+#!/usr/local/bin/perl
+print "Enter the number \n";
+$a = <STDIN>;
+$fact = 1;
+for($i=1;$i<=$a;$i++)
+{
+   $fact = $fact * $i;
+   print ("$fact \n");
+}
+
+
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 201$ perl pgm1.pl
+Enter the number 6
+1
+2
+6
+24
+120
+720
+PGM5: To print the number n number of times using for assigning the value outside the code
+============================================================================
+Input:
+=====
+#!/usr/local/bin/perl
+print ("Enter the number to execute \n");
+$a = <STDIN>;
+for($i=1;$i<=$a;$i++)
+{
+  print ("fact \n");
+}
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 212$ perl pgm1.pl
+Enter the number to execute
+5
+fact
+fact
+fact
+fact
+fact
+PGM6: To print the number n number of times using while assigning the value outside the code
+==============================================================================
+Input:
+=====
+#!/usr/local/bin/perl
+print ("Enter the number to execute \n");
+$a = <STDIN>;
+$i = 1;
+while($i <= $a)
+{
+  $i = $i + 1;
+  print ("fact \n");
+}
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 213$ perl pgm1.pl
+Enter the number to execute
+2
+fact
+fact
+PGM7: Using while statement to print out the first 10 numbers in descending order (10-1)
+=========================================================================
+Input:
+=====
+#!/usr/local/bin/perl
+
+ $i = 11;
+ while ($i >= 2)
+ {
+  $i = $i - 1;
+  print ("$i \n");
+ }
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 16$ perl pgm1.pl
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+PGM8: Using for statement to print out the first 10 numbers in descending order (10-1)
+=========================================================================
+Input:
+=====
+#!/usr/local/bin/perl
+for($i=10;$i>=1;$i--)
+{
+ print ("$i \n");
+}
+Output:
+======
+shalilx /v/global/user/g/go/gowthr 16$ perl pgm1.pl
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+PGM9: To create excel sheet and insert the data in it
+==========================================
+Input:
+=====
+#!/usr/local/bin/perl
+use strict;
+use MSDW::Version
+        'Spreadsheet-WriteExcel' => '2.37',  ####USED IN GENERATING EXCEL/WORKBOOK
+;
+use Spreadsheet::WriteExcel;
+my $workbook = Spreadsheet::WriteExcel->new('Perl.xls');
+my $worksheet = $workbook->add_worksheet();
+$worksheet->write('A1', 'Hi Excel!');
+Output:
+======
+PGM10: To create excel sheet, insert the data in it and send the same through mail.
+===================================================================
+Input:
+=====
+#!/ms/dist/perl5/bin/perl5.9
+use strict;
+use MSDW::Version
+  'Spreadsheet-WriteExcel' 	=> '2.37',  ####USED IN GENERATING EXCEL/WORKBOOK
+  'MIME-tools'             		=> '5.304',  ####USED IN GENERATING MAIL
+  'MailTools'              		=> '2.07',  ####USED IN GENERATING MAIL
+  'MIME-Lite'                     	=> '3.027',  ####USED IN GENERATING MAIL
+  'Email-Date-Format'      	=> '1.002',  ####USED IN GENERATING MAIL
+;
+                    use MIME::Lite;
+                    use Spreadsheet::WriteExcel;
+                    my $workbook = Spreadsheet::WriteExcel->new('Perl.xls');
+                    my $worksheet = $workbook->add_worksheet();
+                    $worksheet->write('A1', 'Excel!');
+                    $workbook->close();
+                     my $msg="Hi Leads, \n\n Send it to gowthami.ramaprasad\@morganstanley.com if you have any questions\/concerns ";
+                    my $to_list='gowthami.ramaprasad@morganstanley.com';
+                    my $file_name='Perl.xls';
+                    my $userid = getpwuid($<);
+                    &mailto('gowthami.ramaprasad@morganstanley.com',$to_list,"Report", $msg, $file_name);
+                    `rm -f $file_name`;
+                    sub mailto
+                    {
+                        my ($userid,$recipient,$subject,$msg,$file_name) = @_;
+                        my $top = MIME::Lite->new
+                      (
+                            Type     => 'multipart/mixed',
+                            From     => $userid,
+                            To       => $recipient,
+                            Subject  => $subject,
+                            Encoding => '7bit',
+                       );
+                    $top->attach( type => 'text/plain', Data =>$msg, disposition => 'inline' );
+                    $top->attach
+                       (
+                            Type        => 'Application/Excel',
+                            Encoding    => 'base64',
+                            Path        => $file_name,
+                            Disposition => 'attachment'
+                       );
+                    $top->send();
+                    return;
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
